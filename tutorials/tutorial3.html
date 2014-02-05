@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Managed Process Tutorial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#">Tutorial</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="#introduction"><i class="icon-chevron-right"></i> Introduction</a></li>
+              <li><a href="#implementing_the_client"><i class="icon-chevron-right"></i> Implementing the client</a></li>
+              <li><a href="#implementing_the_server"><i class="icon-chevron-right"></i> Implementing the server</a></li>
+              <li><a href="#making_use_of_async"><i class="icon-chevron-right"></i> Making use of Async</a></li>
+              <li><a href="#wiring_up_handlers"><i class="icon-chevron-right"></i> Wiring up handlers</a></li>
+              <li><a href="#putting_it_all_together"><i class="icon-chevron-right"></i> Putting it all together</a></li>
+              <li><a href="#performance_considerations"><i class="icon-chevron-right"></i> Performance Considerations</a></li>
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='introduction'>Introduction</h3>
+
+<p>The source code on which this tutorial is based is kept on github, and can be accessed <a href='https://github.com/haskell-distributed/distributed-process-platform/blob/master/tests/SimplePool.hs'>here</a>. Please note that this tutorial is based on the stable (master) branch of distributed-process-platform.</p>
+
+<p>The main idea behind <code>ManagedProcess</code> is to separate the functional and non-functional aspects of a process. By functional, we mean whatever application specific task the process performs, and by non-functional we mean the <em>concurrency</em> or, more precisely, handling of the process&#8217; mailbox.</p>
+
+<p>Another effect that <code>ManagedProcess</code> has is to provide client code with a typed, specific API for interacting with the process, much as a TypedChannel does. We achieve this by writing and exporting functions that operate on the types we want clients to see, and using the API from <code>Control.Distributed.Process.Platform.ManagedProcess.Client</code> to interact with the server.</p>
+
+<p>Let&#8217;s imagine we want to execute tasks on an arbitrary node, using a mechanism much as we would with the <code>call</code> API from distributed-process. As with <code>call</code>, we want the caller to block whilst the remote task is executing, but we also want to put an upper bound on the number of concurrent tasks. We will use <code>ManagedProcess</code> to implement a generic task server with the following characteristics</p>
+
+<ul>
+<li>requests to enqueue a task are handled immediately</li>
+
+<li>callers will block until the task completes (or fails)</li>
+
+<li>an upper bound is placed on the number of concurrent running tasks</li>
+</ul>
+
+<p>Once the upper bound is reached, tasks will be queued up for later execution, and only when we drop below the limit will tasks be taken from the backlog and executed.</p>
+
+<p><code>ManagedProcess</code> provides a basic protocol for <em>server-like</em> processes such as this, based on the synchronous <code>call</code> and asynchronous <code>cast</code> functions used by code we provide to client clients and matching <em>handler</em> functions in the process itself, for which there is a similar API on the <em>server</em>. Although <code>call</code> is a synchronous protocol, communication with the <em>server process</em> is out of band, both from the client and the server&#8217;s point of view. The server implementation chooses whether to reply to a call request immediately, or defer its reply until a later stage and go back to receiving other messages in the meanwhile.</p>
+
+<h3 id='implementing_the_client'>Implementing the client</h3>
+
+<p>Before we figure out the shape of our state, let&#8217;s think about the types we&#8217;ll need to consume in the server process: the tasks we perform and the maximum pool size.</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>type</span> <span class='kt'>PoolSize</span> <span class='ow'>=</span> <span class='kt'>Int</span>
+<span class='kr'>type</span> <span class='kt'>SimpleTask</span> <span class='n'>a</span> <span class='ow'>=</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+</code></pre></div>
+<p>To submit a task, our clients will submit an action in the process monad, wrapped in a <code>Closure</code> environment. We will use the <code>Addressable</code> typeclass to allow clients to specify the server&#8217;s location in whatever manner suits them:</p>
+<div class='highlight'><pre><code class='haskell'><span class='c1'>-- enqueues the task in the pool and blocks</span>
+<span class='c1'>-- the caller until the task is complete</span>
+<span class='nf'>executeTask</span> <span class='ow'>::</span> <span class='n'>forall</span> <span class='n'>s</span> <span class='n'>a</span> <span class='o'>.</span> <span class='p'>(</span><span class='kt'>Addressable</span> <span class='n'>s</span><span class='p'>,</span> <span class='kt'>Serializable</span> <span class='n'>a</span><span class='p'>)</span>
+            <span class='ow'>=&gt;</span> <span class='n'>s</span>
+            <span class='ow'>-&gt;</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+            <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>String</span> <span class='n'>a</span><span class='p'>)</span>
+<span class='nf'>executeTask</span> <span class='n'>sid</span> <span class='n'>t</span> <span class='ow'>=</span> <span class='n'>call</span> <span class='n'>sid</span> <span class='n'>t</span>
+</code></pre></div>
+<p>That&#8217;s it for the client! Note that the type signature we expose to our consumers is specific, and that we do not expose them to either arbitrary messages arriving in their mailbox or to exceptions being thrown in their thread. Instead we return an <code>Either</code>.</p>
+
+<p>There are several varieties of the <code>call</code> API that deal with error handling in different ways. Consult the haddocks for more info about these.</p>
+
+<h3 id='implementing_the_server'>Implementing the server</h3>
+
+<p>Back on the server, we write a function that takes our state and an input message - in this case, the <code>Closure</code> we&#8217;ve been sent - and have that update the process&#8217; state and possibility launch the task if we have enough spare capacity.</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>Pool</span> <span class='n'>a</span> <span class='ow'>=</span> <span class='kt'>Pool</span> <span class='n'>a</span>
+</code></pre></div>
+<p>I&#8217;ve called the state type <code>Pool</code> as we&#8217;re providing a fixed size resource pool from the consumer&#8217;s perspective. We could think of this as a bounded size latch or barrier of sorts, but that conflates the example a bit too much. We parameterise the state by the type of data that can be returned by submitted tasks.</p>
+
+<p>The updated pool must store the task <strong>and</strong> the caller (so we can reply once the task is complete). The <code>ManagedProcess.Server</code> API will provide us with a <code>Recipient</code> value which can be used to reply to the caller at a later time, so we&#8217;ll make use of that here.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>acceptTask</span> <span class='ow'>::</span> <span class='kt'>Serializable</span> <span class='n'>a</span>
+           <span class='ow'>=&gt;</span> <span class='kt'>Pool</span> <span class='n'>a</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Recipient</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+</code></pre></div>
+<p>For our example we will avoid using even vaguely exotic types to manage our process&#8217; internal state, and stick to simple property lists. This is hardly efficient, but that&#8217;s fine for a test/demo.</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>Pool</span> <span class='n'>a</span> <span class='ow'>=</span> <span class='kt'>Pool</span> <span class='p'>{</span>
+    <span class='n'>poolSize</span> <span class='ow'>::</span> <span class='kt'>PoolSize</span>
+  <span class='p'>,</span> <span class='n'>accepted</span> <span class='ow'>::</span> <span class='p'>[(</span><span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>))]</span>
+  <span class='p'>}</span> <span class='kr'>deriving</span> <span class='p'>(</span><span class='kt'>Typeable</span><span class='p'>)</span>
+</code></pre></div>
+<h3 id='making_use_of_async'>Making use of Async</h3>
+
+<p>So <strong>how</strong> can we execute this <code>Closure (Process a)</code> without blocking the server process itself? We will use the <code>Control.Distributed.Process.Platform.Async</code> API to execute the task asynchronously and provide a means for waiting on the result.</p>
+
+<p>In order to use the <code>Async</code> handle to get the result of the computation once it&#8217;s complete, we&#8217;ll have to hang on to a reference. We also need a way to associate the submitter with the handle, so we end up with one field for the active (running) tasks and another for the queue of accepted (but inactive) ones, like so&#8230;</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>Pool</span> <span class='n'>a</span> <span class='ow'>=</span> <span class='kt'>Pool</span> <span class='p'>{</span>
+    <span class='n'>poolSize</span> <span class='ow'>::</span> <span class='kt'>PoolSize</span>
+  <span class='p'>,</span> <span class='n'>active</span>   <span class='ow'>::</span> <span class='p'>[(</span><span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)]</span>
+  <span class='p'>,</span> <span class='n'>accepted</span> <span class='ow'>::</span> <span class='p'>[(</span><span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>))]</span>
+  <span class='p'>}</span> <span class='kr'>deriving</span> <span class='p'>(</span><span class='kt'>Typeable</span><span class='p'>)</span>
+</code></pre></div>
+<p>To turn that <code>Closure</code> environment into a thunk we can evaluate, we&#8217;ll use the built in <code>unClosure</code> function, and we&#8217;ll pass the thunk to <code>async</code> and get back a handle to the async task.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>proc</span> <span class='ow'>&lt;-</span> <span class='n'>unClosure</span> <span class='n'>task&#39;</span>
+<span class='nf'>asyncHandle</span> <span class='ow'>&lt;-</span> <span class='n'>async</span> <span class='n'>proc</span>
+</code></pre></div>
+<p>Of course, we decided that we wouldn&#8217;t block on each <code>Async</code> handle, and we&#8217;re not able to sit in a <em>loop</em> polling all the handles representing tasks we&#8217;re running, because no submissions would be handled whilst spinning and waiting for results. We&#8217;re relying on monitors instead, so we need to store the <code>MonitorRef</code> so we know which monitor signal relates to which async task (and recipient).</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>Pool</span> <span class='n'>a</span> <span class='ow'>=</span> <span class='kt'>Pool</span> <span class='p'>{</span>
+    <span class='n'>poolSize</span> <span class='ow'>::</span> <span class='kt'>PoolSize</span>
+  <span class='p'>,</span> <span class='n'>active</span>   <span class='ow'>::</span> <span class='p'>[(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)]</span>
+  <span class='p'>,</span> <span class='n'>accepted</span> <span class='ow'>::</span> <span class='p'>[(</span><span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>))]</span>
+  <span class='p'>}</span> <span class='kr'>deriving</span> <span class='p'>(</span><span class='kt'>Typeable</span><span class='p'>)</span>
+</code></pre></div>
+<p>Finally we can implement the <code>acceptTask</code> function.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>acceptTask</span> <span class='ow'>::</span> <span class='kt'>Serializable</span> <span class='n'>a</span>
+           <span class='ow'>=&gt;</span> <span class='kt'>Pool</span> <span class='n'>a</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Recipient</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+           <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+<span class='nf'>acceptTask</span> <span class='n'>s</span><span class='o'>@</span><span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>sz&#39;</span> <span class='n'>runQueue</span> <span class='n'>taskQueue</span><span class='p'>)</span> <span class='n'>from</span> <span class='n'>task&#39;</span> <span class='ow'>=</span>
+  <span class='kr'>let</span> <span class='n'>currentSz</span> <span class='ow'>=</span> <span class='n'>length</span> <span class='n'>runQueue</span>
+  <span class='kr'>in</span> <span class='kr'>case</span> <span class='n'>currentSz</span> <span class='o'>&gt;=</span> <span class='n'>sz&#39;</span> <span class='kr'>of</span>
+    <span class='kt'>True</span>  <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+      <span class='n'>return</span> <span class='o'>$</span> <span class='n'>s</span> <span class='p'>{</span> <span class='n'>accepted</span> <span class='ow'>=</span> <span class='p'>((</span><span class='n'>from</span><span class='p'>,</span> <span class='n'>task&#39;</span><span class='p'>)</span><span class='kt'>:</span><span class='n'>taskQueue</span><span class='p'>)</span> <span class='p'>}</span>
+    <span class='kt'>False</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+      <span class='n'>proc</span> <span class='ow'>&lt;-</span> <span class='n'>unClosure</span> <span class='n'>task&#39;</span>
+      <span class='n'>asyncHandle</span> <span class='ow'>&lt;-</span> <span class='n'>async</span> <span class='n'>proc</span>
+      <span class='n'>ref</span> <span class='ow'>&lt;-</span> <span class='n'>monitorAsync</span> <span class='n'>asyncHandle</span>
+      <span class='n'>taskEntry</span> <span class='ow'>&lt;-</span> <span class='n'>return</span> <span class='p'>(</span><span class='n'>ref</span><span class='p'>,</span> <span class='n'>from</span><span class='p'>,</span> <span class='n'>asyncHandle</span><span class='p'>)</span>
+      <span class='n'>return</span> <span class='n'>s</span> <span class='p'>{</span> <span class='n'>active</span> <span class='ow'>=</span> <span class='p'>(</span><span class='n'>taskEntry</span><span class='kt'>:</span><span class='n'>runQueue</span><span class='p'>)</span> <span class='p'>}</span>
+</code></pre></div>
+<p>If we&#8217;re at capacity, we add the task (and caller) to the <code>accepted</code> queue, otherwise we launch and monitor the task using <code>async</code> and stash the monitor ref, caller ref and the async handle together in the <code>active</code> field. Prepending to the list of active/running tasks is a somewhat arbitrary choice. One might argue that heuristically, the younger a task is the less likely it is that it will run for a long time. Either way, I&#8217;ve done this to avoid cluttering the example other data structures, so we can focus on the <code>ManagedProcess</code> APIs only.</p>
+
+<p>Now we will write a function that handles the results. When the monitor signal arrives, we use the async handle to obtain the result and send it back to the caller. Because, even if we were running at capacity, we&#8217;ve now seen a task complete (and therefore reduce the number of active tasks by one), we will also pull off a pending task from the backlog (i.e., accepted), if any exists, and execute it. As with the active task list, we&#8217;re going to take from the backlog in FIFO order, which is almost certainly not what you&#8217;d want in a real application, but that&#8217;s not the point of the example either.</p>
+
+<p>The steps then, are</p>
+
+<ol>
+<li>find the async handle for the monitor ref</li>
+
+<li>pull the result out of it</li>
+
+<li>send the result to the client</li>
+
+<li>bump another task from the backlog (if there is one)</li>
+
+<li>carry on</li>
+</ol>
+
+<p>This chain then, looks like <code>wait h &gt;&gt;= respond c &gt;&gt; bump s t &gt;&gt;= continue</code>.</p>
+
+<p>Item (3) requires special API support from <code>ManagedProcess</code>, because we&#8217;re not just sending <em>any</em> message back to the caller. We&#8217;re replying to a <code>call</code> that has already taken place and is, in fact, still running. The API call for this is <code>replyTo</code>.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>taskComplete</span> <span class='ow'>::</span> <span class='n'>forall</span> <span class='n'>a</span> <span class='o'>.</span> <span class='kt'>Serializable</span> <span class='n'>a</span>
+             <span class='ow'>=&gt;</span> <span class='kt'>Pool</span> <span class='n'>a</span>
+             <span class='ow'>-&gt;</span> <span class='kt'>ProcessMonitorNotification</span>
+             <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>ProcessAction</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>))</span>
+<span class='nf'>taskComplete</span> <span class='n'>s</span><span class='o'>@</span><span class='p'>(</span><span class='kt'>Pool</span> <span class='kr'>_</span> <span class='n'>runQ</span> <span class='kr'>_</span><span class='p'>)</span>
+             <span class='p'>(</span><span class='kt'>ProcessMonitorNotification</span> <span class='n'>ref</span> <span class='kr'>_</span> <span class='kr'>_</span><span class='p'>)</span> <span class='ow'>=</span>
+  <span class='kr'>let</span> <span class='n'>worker</span> <span class='ow'>=</span> <span class='n'>findWorker</span> <span class='n'>ref</span> <span class='n'>runQ</span> <span class='kr'>in</span>
+  <span class='kr'>case</span> <span class='n'>worker</span> <span class='kr'>of</span>
+    <span class='kt'>Just</span> <span class='n'>t</span><span class='o'>@</span><span class='p'>(</span><span class='kr'>_</span><span class='p'>,</span> <span class='n'>c</span><span class='p'>,</span> <span class='n'>h</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>wait</span> <span class='n'>h</span> <span class='o'>&gt;&gt;=</span> <span class='n'>respond</span> <span class='n'>c</span> <span class='o'>&gt;&gt;</span> <span class='n'>bump</span> <span class='n'>s</span> <span class='n'>t</span> <span class='o'>&gt;&gt;=</span> <span class='n'>continue</span>
+    <span class='kt'>Nothing</span>          <span class='ow'>-&gt;</span> <span class='n'>continue</span> <span class='n'>s</span>
+    <span class='kr'>where</span>
+      <span class='n'>respond</span> <span class='ow'>::</span> <span class='kt'>Recipient</span>
+              <span class='ow'>-&gt;</span> <span class='kt'>AsyncResult</span> <span class='n'>a</span>
+              <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='nb'>()</span>
+      <span class='n'>respond</span> <span class='n'>c</span> <span class='p'>(</span><span class='kt'>AsyncDone</span>       <span class='n'>r</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>replyTo</span> <span class='n'>c</span> <span class='p'>((</span><span class='kt'>Right</span> <span class='n'>r</span><span class='p'>)</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>String</span> <span class='n'>a</span><span class='p'>))</span>
+      <span class='n'>respond</span> <span class='n'>c</span> <span class='p'>(</span><span class='kt'>AsyncFailed</span>     <span class='n'>d</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>replyTo</span> <span class='n'>c</span> <span class='p'>((</span><span class='kt'>Left</span> <span class='p'>(</span><span class='n'>show</span> <span class='n'>d</span><span class='p'>))</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>String</span> <span class='n'>a</span><span class='p'>))</span>
+      <span class='n'>respond</span> <span class='n'>c</span> <span class='p'>(</span><span class='kt'>AsyncLinkFailed</span> <span class='n'>d</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>replyTo</span> <span class='n'>c</span> <span class='p'>((</span><span class='kt'>Left</span> <span class='p'>(</span><span class='n'>show</span> <span class='n'>d</span><span class='p'>))</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>String</span> <span class='n'>a</span><span class='p'>))</span>
+      <span class='n'>respond</span> <span class='kr'>_</span>      <span class='kr'>_</span>              <span class='ow'>=</span> <span class='n'>die</span> <span class='o'>$</span> <span class='kt'>TerminateOther</span> <span class='s'>&quot;IllegalState&quot;</span>
+
+      <span class='n'>bump</span> <span class='ow'>::</span> <span class='kt'>Pool</span> <span class='n'>a</span> <span class='ow'>-&gt;</span> <span class='p'>(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+      <span class='n'>bump</span> <span class='n'>st</span><span class='o'>@</span><span class='p'>(</span><span class='kt'>Pool</span> <span class='kr'>_</span> <span class='n'>runQueue</span> <span class='n'>acc</span><span class='p'>)</span> <span class='n'>worker</span> <span class='ow'>=</span>
+        <span class='kr'>let</span> <span class='n'>runQ2</span>  <span class='ow'>=</span> <span class='n'>deleteFromRunQueue</span> <span class='n'>worker</span> <span class='n'>runQueue</span> <span class='kr'>in</span>
+        <span class='kr'>case</span> <span class='n'>acc</span> <span class='kr'>of</span>
+          <span class='kt'>[]</span>           <span class='ow'>-&gt;</span> <span class='n'>return</span> <span class='n'>st</span> <span class='p'>{</span> <span class='n'>active</span> <span class='ow'>=</span> <span class='n'>runQ2</span> <span class='p'>}</span>
+          <span class='p'>((</span><span class='n'>tr</span><span class='p'>,</span><span class='n'>tc</span><span class='p'>)</span><span class='kt'>:</span><span class='n'>ts</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>acceptTask</span> <span class='p'>(</span><span class='n'>st</span> <span class='p'>{</span> <span class='n'>accepted</span> <span class='ow'>=</span> <span class='n'>ts</span><span class='p'>,</span> <span class='n'>active</span> <span class='ow'>=</span> <span class='n'>runQ2</span> <span class='p'>})</span> <span class='n'>tr</span> <span class='n'>tc</span>
+
+<span class='nf'>findWorker</span> <span class='ow'>::</span> <span class='kt'>MonitorRef</span>
+         <span class='ow'>-&gt;</span> <span class='p'>[(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)]</span>
+         <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='p'>(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)</span>
+<span class='nf'>findWorker</span> <span class='n'>key</span> <span class='ow'>=</span> <span class='n'>find</span> <span class='p'>(</span><span class='nf'>\</span><span class='p'>(</span><span class='n'>ref</span><span class='p'>,</span><span class='kr'>_</span><span class='p'>,</span><span class='kr'>_</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>ref</span> <span class='o'>==</span> <span class='n'>key</span><span class='p'>)</span>
+
+<span class='nf'>deleteFromRunQueue</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)</span>
+                 <span class='ow'>-&gt;</span> <span class='p'>[(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)]</span>
+                 <span class='ow'>-&gt;</span> <span class='p'>[(</span><span class='kt'>MonitorRef</span><span class='p'>,</span> <span class='kt'>Recipient</span><span class='p'>,</span> <span class='kt'>Async</span> <span class='n'>a</span><span class='p'>)]</span>
+<span class='nf'>deleteFromRunQueue</span> <span class='n'>c</span><span class='o'>@</span><span class='p'>(</span><span class='n'>p</span><span class='p'>,</span> <span class='kr'>_</span><span class='p'>,</span> <span class='kr'>_</span><span class='p'>)</span> <span class='n'>runQ</span> <span class='ow'>=</span> <span class='n'>deleteBy</span> <span class='p'>(</span><span class='nf'>\</span><span class='kr'>_</span> <span class='p'>(</span><span class='n'>b</span><span class='p'>,</span> <span class='kr'>_</span><span class='p'>,</span> <span class='kr'>_</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>b</span> <span class='o'>==</span> <span class='n'>p</span><span class='p'>)</span> <span class='n'>c</span> <span class='n'>runQ</span>
+</code></pre></div>
+<p>That was pretty simple. We&#8217;ve deal with mapping the <code>AsyncResult</code> to <code>Either</code> values, which we <em>could</em> have left to the caller, but this makes the client facing API much simpler to work with.</p>
+
+<h3 id='wiring_up_handlers'>Wiring up handlers</h3>
+
+<p>The <code>ProcessDefinition</code> takes a number of different kinds of handler. The only ones we care about are the call handler for submission handling, and the handler that deals with monitor signals.</p>
+
+<p>Call and cast handlers live in the <code>apiHandlers</code> list of a <code>ProcessDefinition</code> and must have the type <code>Dispatcher s</code> where <code>s</code> is the state type for the process. We cannot construct a <code>Dispatcher</code> ourselves, but a range of functions in the <code>ManagedProcess.Server</code> module exist to lift functions like the ones we&#8217;ve just defined. The particular function we need is <code>handleCallFrom</code>, which works with functions over the state, <code>Recipient</code> and the call data/message. All the varieties of <code>handleCall</code> need to return a <code>ProcessReply</code>, which has the following type</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>ProcessReply</span> <span class='n'>s</span> <span class='n'>a</span> <span class='ow'>=</span>
+    <span class='kt'>ProcessReply</span> <span class='n'>a</span> <span class='p'>(</span><span class='kt'>ProcessAction</span> <span class='n'>s</span><span class='p'>)</span>
+  <span class='o'>|</span> <span class='kt'>NoReply</span> <span class='p'>(</span><span class='kt'>ProcessAction</span> <span class='n'>s</span><span class='p'>)</span>
+</code></pre></div>
+<p>There are also various utility function in the API to construct a <code>ProcessAction</code> and we will make use of <code>noReply_</code> here, which constructs <code>NoReply</code> for us and presets the <code>ProcessAction</code> to <code>ProcessContinue</code>, which goes back to receiving messages without further action. We already have a function over the right input domain which evaluates to a new state so we end up with:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>storeTask</span> <span class='ow'>::</span> <span class='kt'>Serializable</span> <span class='n'>a</span>
+          <span class='ow'>=&gt;</span> <span class='kt'>Pool</span> <span class='n'>a</span>
+          <span class='ow'>-&gt;</span> <span class='kt'>Recipient</span>
+          <span class='ow'>-&gt;</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+          <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>ProcessReply</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span> <span class='nb'>()</span><span class='p'>)</span>
+<span class='nf'>storeTask</span> <span class='n'>s</span> <span class='n'>r</span> <span class='n'>c</span> <span class='ow'>=</span> <span class='n'>acceptTask</span> <span class='n'>s</span> <span class='n'>r</span> <span class='n'>c</span> <span class='o'>&gt;&gt;=</span> <span class='n'>noReply_</span>
+</code></pre></div>
+<p>In order to spell things out for the compiler, we need to put a type signature in place at the call site too, so our final construct is</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>handleCallFrom</span> <span class='p'>(</span><span class='nf'>\</span><span class='n'>s</span> <span class='n'>f</span> <span class='p'>(</span><span class='n'>p</span> <span class='ow'>::</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>))</span> <span class='ow'>-&gt;</span> <span class='n'>storeTask</span> <span class='n'>s</span> <span class='n'>f</span> <span class='n'>p</span><span class='p'>)</span>
+</code></pre></div>
+<p>No such thing is required for <code>taskComplete</code>, as there&#8217;s no ambiguity about its type. Our process definition is finished, and here it is:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>poolServer</span> <span class='ow'>::</span> <span class='n'>forall</span> <span class='n'>a</span> <span class='o'>.</span> <span class='p'>(</span><span class='kt'>Serializable</span> <span class='n'>a</span><span class='p'>)</span> <span class='ow'>=&gt;</span> <span class='kt'>ProcessDefinition</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+<span class='nf'>poolServer</span> <span class='ow'>=</span>
+    <span class='n'>defaultProcess</span> <span class='p'>{</span>
+        <span class='n'>apiHandlers</span> <span class='ow'>=</span> <span class='p'>[</span>
+          <span class='n'>handleCallFrom</span> <span class='p'>(</span><span class='nf'>\</span><span class='n'>s</span> <span class='n'>f</span> <span class='p'>(</span><span class='n'>p</span> <span class='ow'>::</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>))</span> <span class='ow'>-&gt;</span> <span class='n'>storeTask</span> <span class='n'>s</span> <span class='n'>f</span> <span class='n'>p</span><span class='p'>)</span>
+        <span class='p'>]</span>
+      <span class='p'>,</span> <span class='n'>infoHandlers</span> <span class='ow'>=</span> <span class='p'>[</span>
+            <span class='n'>handleInfo</span> <span class='n'>taskComplete</span>
+        <span class='p'>]</span>
+      <span class='p'>}</span> <span class='ow'>::</span> <span class='kt'>ProcessDefinition</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+</code></pre></div>
+<p>Starting the pool is fairly simple and <code>ManagedProcess</code> has some utilities to help.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>simplePool</span> <span class='ow'>::</span> <span class='n'>forall</span> <span class='n'>a</span> <span class='o'>.</span> <span class='p'>(</span><span class='kt'>Serializable</span> <span class='n'>a</span><span class='p'>)</span>
+              <span class='ow'>=&gt;</span> <span class='kt'>PoolSize</span>
+              <span class='ow'>-&gt;</span> <span class='kt'>ProcessDefinition</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>)</span>
+              <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='p'>(</span><span class='kt'>InitResult</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>))</span> <span class='kt'>TerminateReason</span><span class='p'>)</span>
+<span class='nf'>simplePool</span> <span class='n'>sz</span> <span class='n'>server</span> <span class='ow'>=</span> <span class='n'>start</span> <span class='n'>sz</span> <span class='n'>init&#39;</span> <span class='n'>server</span>
+  <span class='kr'>where</span> <span class='n'>init&#39;</span> <span class='ow'>::</span> <span class='kt'>PoolSize</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>InitResult</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>a</span><span class='p'>))</span>
+        <span class='n'>init&#39;</span> <span class='n'>sz&#39;</span> <span class='ow'>=</span> <span class='n'>return</span> <span class='o'>$</span> <span class='kt'>InitOk</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='n'>sz&#39;</span> <span class='kt'>[]</span> <span class='kt'>[]</span><span class='p'>)</span> <span class='kt'>Infinity</span>
+</code></pre></div>
+<h3 id='putting_it_all_together'>Putting it all together</h3>
+
+<p>Starting up a pool locally or on a remote node is just a matter of using <code>spawn</code> or <code>spawnLocal</code> with <code>simplePool</code>. The second argument should specify the type of results, e.g.,</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>let</span> <span class='n'>s&#39;</span> <span class='ow'>=</span> <span class='n'>poolServer</span> <span class='ow'>::</span> <span class='kt'>ProcessDefinition</span> <span class='p'>(</span><span class='kt'>Pool</span> <span class='kt'>String</span><span class='p'>)</span>
+<span class='kr'>in</span> <span class='n'>simplePool</span> <span class='n'>s</span> <span class='n'>s&#39;</span>
+</code></pre></div>
+<p>Defining tasks is as simple as making them remote-worthy:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>sampleTask</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>TimeInterval</span><span class='p'>,</span> <span class='kt'>String</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='kt'>String</span>
+<span class='nf'>sampleTask</span> <span class='p'>(</span><span class='n'>t</span><span class='p'>,</span> <span class='n'>s</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>sleep</span> <span class='n'>t</span> <span class='o'>&gt;&gt;</span> <span class='n'>return</span> <span class='n'>s</span>
+
+<span class='o'>$</span><span class='p'>(</span><span class='n'>remotable</span> <span class='p'>[</span><span class='n'>&#39;sampleTask</span><span class='p'>])</span>
+</code></pre></div>
+<p>And executing them is just as simple too. Given a pool which has been registered locally as &#8220;mypool&#8221;, we can simply call it directly:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>job</span> <span class='ow'>&lt;-</span> <span class='n'>return</span> <span class='o'>$</span> <span class='p'>(</span><span class='o'>$</span><span class='p'>(</span><span class='n'>mkClosure</span> <span class='n'>&#39;sampleTask</span><span class='p'>)</span> <span class='p'>(</span><span class='n'>seconds</span> <span class='mi'>2</span><span class='p'>,</span> <span class='s'>&quot;foobar&quot;</span><span class='p'>))</span>
+<span class='nf'>call</span> <span class='s'>&quot;mypool&quot;</span> <span class='n'>job</span> <span class='o'>&gt;&gt;=</span> <span class='n'>wait</span> <span class='o'>&gt;&gt;=</span> <span class='n'>stash</span> <span class='n'>result</span>
+</code></pre></div>
+<p>Hopefully this has demonstrated a few benefits of the <code>ManagedProcess</code> API, although it&#8217;s really just scratching the surface. We have focussed on the code that matters - state transitions and decision making, without getting bogged down (much) with receiving or sending messages, apart from using some simple APIs when we needed to.</p>
+
+<h3 id='performance_considerations'>Performance Considerations</h3>
+
+<p>We did not take much care over our choice of data structures. Might this have profound consequences for clients? The LIFO nature of the pending backlog is surprising, but we can change that quite easily by changing data structures.</p>
+
+<p>What&#8217;s perhaps more of a concern is the cost of using <code>Async</code> everywhere - remember we used this in the <em>server</em> to handle concurrently executing tasks and obtaining their results. The <code>Async</code> module is also used by <code>ManagedProcess</code> to handle the <code>call</code> mechanism, and there <em>are</em> some overheads to using it. An invocation of <code>async</code> will create two new processes: one to perform the calculation and another to monitor the first and handle failure and/or cancellation. Spawning processes is cheap, but not free as each process is a haskell thread, plus some additional book keeping data.</p>
+
+<p>The cost of spawning two processes for each computation/task might represent just that bit too much overhead for some applications. In our next tutorial, we&#8217;ll look at the <code>Control.Distributed.Process.Platform.Task</code> API, which looks a lot like <code>Async</code> but manages exit signals in a single thread and makes configurable task pools and task supervision strategy part of its API.</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>

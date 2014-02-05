@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Building new Transports</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h2 id='guide'>Guide</h2>
+
+<p>On this page we describe the TCP Transport as an example for developers who wish to write their own instantiations of the Transport layer. The purpose of any such instantiation is to provide a function</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>createTransport</span> <span class='ow'>::</span> <span class='o'>&lt;</span><span class='n'>transport</span> <span class='n'>specific</span> <span class='n'>arguments</span><span class='o'>&gt;</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='o'>&lt;</span><span class='n'>transport</span> <span class='n'>specific</span> <span class='ne'>error</span><span class='o'>&gt;</span> <span class='kt'>Transport</span><span class='p'>)</span>
+</code></pre></div>
+<p>For instance, the TCP transport offers</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>createTransport</span> <span class='ow'>::</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>HostName</span> <span class='ow'>-&gt;</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>ServiceName</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>IOException</span> <span class='kt'>Transport</span><span class='p'>)</span>
+</code></pre></div>
+<p>This could be the only function that <code>Network.Transport.TCP</code> exports (the only reason it exports more is to provide an API for unit tests for the TCP transport, some of which work at a lower level). Your implementation will now be guided by the <code>Network.Transport</code> API. In particular, you will need to implement <code>newEndPoint</code>, which in turn will require you to implement <code>receive</code>, <code>connect</code>, etc.</p>
+
+<h4 id='mapping_networktransport_concepts_to_tcp'>Mapping Network.Transport concepts to TCP</h4>
+
+<p>The following picture is a schematic overview of how the Network.Transport concepts map down to their TCP counterparts.</p>
+<hr />
+<p><img alt='The TCP transport' src='/img/NetworkTCP.png' /></p>
+<hr />
+<ul>
+<li>The blue boxes represent <code>Transport</code> instances. At the top we have two Transport instances on the same TCP node 198.51.100.1. These could be as part of the same Haskell process or, perhaps more typically, in separate processes. Different Transport instances on the same host must get a different port number.</li>
+
+<li>The orange boxes represent <code>EndPoint</code>s. A Transport can have multiple EndPoints (or none). EndPointAddresses in the TCP transport are triplets <code>TCP host:TCP port:endpoint ID</code>.</li>
+
+<li>The heavyset lines represent (heavyweight, bidirectional) TCP connections; the squiggly lines represent Transport level (lightweight, unidirectional) connections. The TCP transport guarantees that at most a single TCP connection will be set up between any pair of endpoints; all lightweight connections get multiplexed over this single connection.</li>
+
+<li>All squiggly lines end up in a single fat dot in the middle of the endpoint. This represents a <code>Chan</code> on which all endpoint <code>Event</code>s are posted.</li>
+</ul>
+
+<h2 id='implementation'>Implementation</h2>
+
+<p>We briefly discuss the implementation of the most important functions in the Transport API.</p>
+
+<h4 id='setup_'>Setup (<code>createTransport</code>)</h4>
+
+<p>When a TCP transport is created at host 192.51.100.1, port 1080, <code>createTransport</code> sets up a socket, binds it to 192.51.100.1:1080, and then spawns a thread to listen for incoming requests. This thread will handle the connection requests for all endpoints on this TCP node: individual endpoints do <em>not</em> set up their own listening sockets.</p>
+
+<p>This is the only set up that <code>Network.Transport.TCP.createTransport</code> needs to do.</p>
+
+<h4 id='creating_new_endpoints_'>Creating new endpoints (<code>newEndPoint</code>)</h4>
+
+<p>In the TCP transport the set up of new endpoints is straightforward. We only need to create a new <code>Chan</code> on which we will output all the events and allocate a new ID for the endpoint. Now <code>receive</code> is just <code>readChan</code> and <code>address</code> is the triplet <code>host:port:ID</code></p>
+
+<h4 id='new_connections_'>New connections (<code>connect</code>)</h4>
+
+<p>Consider the situation shown in the diagram above, and suppose that endpoint 198.51.100.1:1081:0 (lets call it <em>A</em>) wants to connect to 198.51.100.2:1080:1 (_B_). Since there is no TCP connection between these two endpoints yet we must set one up.</p>
+
+<ul>
+<li><em>A</em> creates a socket and connects to 198.51.100.2:1080. The transport thread at 198.51.100.2 accepts the connection.</li>
+
+<li><em>A</em> now sends two messages across the socket: first, the ID of the remote endpoint it wants to connect to (1) and then it own full address (192.51.100.1:1081:0). The first message is necessary because the remote transport is responsible for handling the connection requests for all its endpoints. The second message is necessary to ensure that when <em>B</em> subsequently attempts to <code>connect</code> to <em>A</em> we know that a TCP connection to <em>A</em> is already available.</li>
+
+<li><em>B</em> will respond with <code>ConnectionRequestAccepted</code> and spawn a thread to listen for incoming messages on the newly created TCP connection.</li>
+</ul>
+
+<p>At this point there is a TCP connection between <em>A</em> and <em>B</em> but not yet a Network.Transport connection; at this point, however, the procedure is the same for all connection requests from <em>A</em> to <em>B</em> (as well as as from <em>B</em> to <em>A</em>):</p>
+
+<ul>
+<li><em>A</em> sends a <code>RequestConnectionId</code> message to <em>B</em> across the existing TCP connection.</li>
+
+<li><em>B</em> creates a new connection ID and sends it back to <em>A</em>. At this point <em>B</em> will output a <code>ConnectionOpened</code> on <em>B</em>&#8217;s endpoint.</li>
+</ul>
+
+<blockquote>
+<p>A complication arises when <em>A</em> and <em>B</em> simultaneously attempt to connect each other and no TCP connection has yet been set up. In this case <em>two</em> TCP connections will temporarily be created; <em>B</em> will accept the connection request from <em>A</em>, keeping the first TCP connection, but <em>A</em> will reply with <code>ConnectionRequestCrossed</code>, denying the connection request from <em>B</em>, and then close the socket.</p>
+</blockquote>
+
+<p>Note that connection IDs are <em>locally</em> unique. When <em>A</em> and <em>B</em> both connect to <em>C</em>, then <em>C</em> will receive two <code>ConnectionOpened</code> events with IDs (say) 1024 and 1025. However, when <em>A</em> connects to <em>B</em> and <em>C</em>, then it is entirely possible that the connection ID that <em>A</em> receives from both <em>B</em> and <em>C</em> is identical. Connection IDs for outgoing connections are however not visible to application code.</p>
+
+<h4 id='sending_messages_'>Sending messages (<code>send</code>)</h4>
+
+<p>To send a message from <em>A</em> to <em>B</em> the payload is given a Transport header consisting of the message length and the connection ID. When <em>B</em> receives the message it posts a <code>Received</code> event.</p>
+
+<h4 id='closing_a_connection'>Closing a connection</h4>
+
+<p>To close a connection, <em>A</em> just sends a <code>CloseConnection</code> request to <em>B</em>, and <em>B</em> will post a <code>ConnectionClosed</code> event.</p>
+
+<p>When there are no more Transport connections between two endpoints the TCP connection between them is torn down.</p>
+
+<blockquote>
+<p>Actually, it&#8217;s not quite that simple, because <em>A</em> and <em>B</em> need to agree that the TCP connection is no longer required. <em>A</em> might think that the connection can be torn down, but there might be a <code>RequestConnectionId</code> message from <em>B</em> to <em>A</em> in transit in the network. <em>A</em> and <em>B</em> both do reference counting on the TCP connection. When <em>A</em>&#8217;s reference count for its connection to <em>B</em> reaches zero it will send a <code>CloseSocket</code> request to <em>B</em>. When <em>B</em> receives it, and its refcount for its connection to <em>A</em> is also zero, it will close its socket and reply with a reciprocal <code>CloseSocket</code> to <em>A</em>. If however <em>B</em> had already sent a <code>RequestConnectionId</code> to <em>A</em> it will simply ignore the <code>CloseSocket</code> request, and when <em>A</em> receives the <code>RequestConnectionId</code> it simply forgets it ever sent the <code>CloseSocket</code> request.</p>
+</blockquote>
+
+<h4 id='transport_instances_for_connectionless_protocols'>Transport instances for connectionless protocols</h4>
+
+<p>In the TCP transport <code>createTransport</code> needs to do some setup, <code>newEndPoint</code> barely needs to do any at all, and <code>connect</code> needs to set up a TCP connection when none yet exists to the destination endpoint. In Transport instances for connectionless protocols this balance of work will be different. For instance, for a UDP transport <code>createTransport</code> may barely need to do any setup, <code>newEndPoint</code> may set up a UDP socket for the endpoint, and <code>connect</code> may only have to setup some internal datastructures and send a UDP message.</p>
+
+<h4 id='error_handling'>Error handling</h4>
+
+<p>Network.Transport API functions should not throw any exceptions, but declare explicitly in their types what errors can be returned. This means that we are very explicit about which errors can occur, and moreover map Transport-specific errors (&#8220;socket unavailable&#8221;) to generic Transport errors (&#8220;insufficient resources&#8221;). A typical example is <code>connect</code> with type:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>connect</span> <span class='ow'>::</span> <span class='kt'>EndPoint</span>         <span class='c1'>-- ^ Local endpoint</span>
+        <span class='ow'>-&gt;</span> <span class='kt'>EndPointAddress</span>  <span class='c1'>-- ^ Remote endpoint</span>
+        <span class='ow'>-&gt;</span> <span class='kt'>Reliability</span>      <span class='c1'>-- ^ Desired reliability of the connection</span>
+        <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='p'>(</span><span class='kt'>TransportError</span> <span class='kt'>ConnectErrorCode</span><span class='p'>)</span> <span class='kt'>Connection</span><span class='p'>)</span>
+</code></pre></div>
+<p><code>TransportError</code> is defined as</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>TransportError</span> <span class='ne'>error</span> <span class='ow'>=</span> <span class='kt'>TransportError</span> <span class='ne'>error</span> <span class='kt'>String</span>
+  <span class='kr'>deriving</span> <span class='kt'>Typeable</span>
+</code></pre></div>
+<p>and has <code>Show</code> and <code>Exception</code> instances so that application code has the option of <code>throw</code>ing returned errors. Here is a typical example of error handling in the TCP transport; it is an internal function that does the initial part of the TCP connection setup: create a new socket, and the remote endpoint ID we&#8217;re interested in and our own address, and then wait for and return the response:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>socketToEndPoint</span> <span class='ow'>::</span> <span class='kt'>EndPointAddress</span> <span class='c1'>-- ^ Our address </span>
+                 <span class='ow'>-&gt;</span> <span class='kt'>EndPointAddress</span> <span class='c1'>-- ^ Their address</span>
+                 <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='p'>(</span><span class='kt'>TransportError</span> <span class='kt'>ConnectErrorCode</span><span class='p'>)</span> <span class='p'>(</span><span class='kt'>N</span><span class='o'>.</span><span class='kt'>Socket</span><span class='p'>,</span> <span class='kt'>ConnectionRequestResponse</span><span class='p'>))</span> 
+<span class='nf'>socketToEndPoint</span> <span class='p'>(</span><span class='kt'>EndPointAddress</span> <span class='n'>ourAddress</span><span class='p'>)</span> <span class='n'>theirAddress</span> <span class='ow'>=</span> <span class='n'>try</span> <span class='o'>$</span> <span class='kr'>do</span> 
+    <span class='p'>(</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>port</span><span class='p'>,</span> <span class='n'>theirEndPointId</span><span class='p'>)</span> <span class='ow'>&lt;-</span> <span class='kr'>case</span> <span class='n'>decodeEndPointAddress</span> <span class='n'>theirAddress</span> <span class='kr'>of</span> 
+      <span class='kt'>Nothing</span>  <span class='ow'>-&gt;</span> <span class='n'>throw</span> <span class='p'>(</span><span class='n'>failed</span> <span class='o'>.</span> <span class='n'>userError</span> <span class='o'>$</span> <span class='s'>&quot;Could not parse&quot;</span><span class='p'>)</span>
+      <span class='kt'>Just</span> <span class='n'>dec</span> <span class='ow'>-&gt;</span> <span class='n'>return</span> <span class='n'>dec</span>
+    <span class='n'>addr</span><span class='kt'>:</span><span class='kr'>_</span> <span class='ow'>&lt;-</span> <span class='n'>mapExceptionIO</span> <span class='n'>invalidAddress</span> <span class='o'>$</span> <span class='kt'>N</span><span class='o'>.</span><span class='n'>getAddrInfo</span> <span class='kt'>Nothing</span> <span class='p'>(</span><span class='kt'>Just</span> <span class='n'>host</span><span class='p'>)</span> <span class='p'>(</span><span class='kt'>Just</span> <span class='n'>port</span><span class='p'>)</span>
+    <span class='n'>bracketOnError</span> <span class='p'>(</span><span class='n'>createSocket</span> <span class='n'>addr</span><span class='p'>)</span> <span class='kt'>N</span><span class='o'>.</span><span class='n'>sClose</span> <span class='o'>$</span> <span class='nf'>\</span><span class='n'>sock</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+      <span class='n'>mapExceptionIO</span> <span class='n'>failed</span> <span class='o'>$</span> <span class='kt'>N</span><span class='o'>.</span><span class='n'>setSocketOption</span> <span class='n'>sock</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>ReuseAddr</span> <span class='mi'>1</span>
+      <span class='n'>mapExceptionIO</span> <span class='n'>invalidAddress</span> <span class='o'>$</span> <span class='kt'>N</span><span class='o'>.</span><span class='n'>connect</span> <span class='n'>sock</span> <span class='p'>(</span><span class='kt'>N</span><span class='o'>.</span><span class='n'>addrAddress</span> <span class='n'>addr</span><span class='p'>)</span> 
+      <span class='n'>response</span> <span class='ow'>&lt;-</span> <span class='n'>mapExceptionIO</span> <span class='n'>failed</span> <span class='o'>$</span> <span class='kr'>do</span>
+        <span class='n'>sendMany</span> <span class='n'>sock</span> <span class='p'>(</span><span class='n'>encodeInt32</span> <span class='n'>theirEndPointId</span> <span class='kt'>:</span> <span class='n'>prependLength</span> <span class='p'>[</span><span class='n'>ourAddress</span><span class='p'>])</span> 
+        <span class='n'>recvInt32</span> <span class='n'>sock</span>
+      <span class='kr'>case</span> <span class='n'>tryToEnum</span> <span class='n'>response</span> <span class='kr'>of</span>
+        <span class='kt'>Nothing</span> <span class='ow'>-&gt;</span> <span class='n'>throw</span> <span class='p'>(</span><span class='n'>failed</span> <span class='o'>.</span> <span class='n'>userError</span> <span class='o'>$</span> <span class='s'>&quot;Unexpected response&quot;</span><span class='p'>)</span>
+        <span class='kt'>Just</span> <span class='n'>r</span>  <span class='ow'>-&gt;</span> <span class='n'>return</span> <span class='p'>(</span><span class='n'>sock</span><span class='p'>,</span> <span class='n'>r</span><span class='p'>)</span>
+  <span class='kr'>where</span>
+    <span class='n'>createSocket</span> <span class='ow'>::</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>AddrInfo</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>Socket</span>
+    <span class='n'>createSocket</span> <span class='n'>addr</span> <span class='ow'>=</span> <span class='n'>mapExceptionIO</span> <span class='n'>insufficientResources</span> <span class='o'>$</span>
+      <span class='kt'>N</span><span class='o'>.</span><span class='n'>socket</span> <span class='p'>(</span><span class='kt'>N</span><span class='o'>.</span><span class='n'>addrFamily</span> <span class='n'>addr</span><span class='p'>)</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>Stream</span> <span class='kt'>N</span><span class='o'>.</span><span class='n'>defaultProtocol</span>
+
+    <span class='n'>invalidAddress</span><span class='p'>,</span> <span class='n'>insufficientResources</span><span class='p'>,</span> <span class='n'>failed</span> <span class='ow'>::</span> <span class='kt'>IOException</span> <span class='ow'>-&gt;</span> <span class='kt'>TransportError</span> <span class='kt'>ConnectErrorCode</span>
+    <span class='n'>invalidAddress</span>        <span class='ow'>=</span> <span class='kt'>TransportError</span> <span class='kt'>ConnectNotFound</span> <span class='o'>.</span> <span class='n'>show</span> 
+    <span class='n'>insufficientResources</span> <span class='ow'>=</span> <span class='kt'>TransportError</span> <span class='kt'>ConnectInsufficientResources</span> <span class='o'>.</span> <span class='n'>show</span> 
+    <span class='n'>failed</span>                <span class='ow'>=</span> <span class='kt'>TransportError</span> <span class='kt'>ConnectFailed</span> <span class='o'>.</span> <span class='n'>show</span>
+</code></pre></div>
+<p>Note how exceptions get mapped to <code>TransportErrors</code> using <code>mapExceptionID</code>, which is defined in <code>Network.Transport.Internal</code> as</p>
+<div class='highlight'><pre><code class='haskell'>    <span class='n'>mapExceptionIO</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>Exception</span> <span class='n'>e1</span><span class='p'>,</span> <span class='kt'>Exception</span> <span class='n'>e2</span><span class='p'>)</span> <span class='ow'>=&gt;</span> <span class='p'>(</span><span class='n'>e1</span> <span class='ow'>-&gt;</span> <span class='n'>e2</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='n'>a</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='n'>a</span>
+    <span class='n'>mapExceptionIO</span> <span class='n'>f</span> <span class='n'>p</span> <span class='ow'>=</span> <span class='n'>catch</span> <span class='n'>p</span> <span class='p'>(</span><span class='n'>throw</span> <span class='o'>.</span> <span class='n'>f</span><span class='p'>)</span>
+</code></pre></div>
+<p>Moreover, the original exception is used as the <code>String</code> part of the <code>TransportError</code>. This means that application developers get transport-specific feedback, which is useful for debugging, not cannot take use this transport-specific information in their <em>code</em>, which would couple applications to tightly with one specific transport implementation.</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+

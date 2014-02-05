@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Network.Transport</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='overview'>Overview</h3>
+
+<p><code>Network.Transport</code> is a Network Abstraction Layer which provides the following high-level concepts:</p>
+
+<ul>
+<li>Nodes in the network are represented by <code>EndPoint</code>s. These are heavyweight stateful objects.</li>
+
+<li>Each <code>EndPoint</code> has an <code>EndPointAddress</code>.</li>
+
+<li>Connections can be established from one <code>EndPoint</code> to another using the <code>EndPointAddress</code> of the remote end.</li>
+
+<li>The <code>EndPointAddress</code> can be serialised and sent over the network, where as <code>EndPoint</code>s and connections cannot.</li>
+
+<li>Connections between <code>EndPoint</code>s are unidirectional and lightweight.</li>
+
+<li>Outgoing messages are sent via a <code>Connection</code> object that represents the sending end of the connection.</li>
+
+<li>Incoming messages for <strong>all</strong> of the incoming connections on an <code>EndPoint</code> are collected via a shared receive queue.</li>
+
+<li>In addition to incoming messages, <code>EndPoint</code>s are notified of other <code>Event</code>s such as new connections or broken connections.</li>
+</ul>
+
+<p>This design was heavily influenced by the design of the <a href='http://www.olcf.ornl.gov/center-projects/common-communication-interface/'>Common Communication Interface/CCI</a>. Important design goals are:</p>
+
+<ul>
+<li>Connections should be lightweight: it should be no problem to create thousands of connections between endpoints.</li>
+
+<li>Error handling is explicit: every function declares as part of its type which errors it can return (no exceptions are thrown)</li>
+
+<li>Error handling is &#8220;abstract&#8221;: errors that originate from implementation specific problems (such as &#8220;no more sockets&#8221; in the TCP implementation) get mapped to generic errors (&#8220;insufficient resources&#8221;) at the Transport level.</li>
+</ul>
+
+<p>It is intended that <code>Network.Transport</code> can be instantiated to use many different protocols for message passing: TCP/IP, UDP, MPI, CCI, ZeroMQ, ssh, MVars, Unix pipes and more. Currently, we offer a TCP/IP transport and (mostly for demonstration purposes) an in-memory <code>Chan</code>-based transport.</p>
+
+<h3 id='package_status'><strong>Package status</strong></h3>
+
+<p>The TCP/IP implementation of Network.Transport should be usable, if not completely stable yet. The design of the transport layer may also still change. Feedback and suggestions are most welcome. Email <a href='mailto:duncan@well-typed.com'>Duncan</a> or <a href='mailto:edsko@well-typed.com'>Edsko</a> at Well-Typed, find us at #HaskellTransportLayer on freenode, or post on the <a href='https://groups.google.com/forum/?fromgroups#!forum/parallel-haskell'>Parallel Haskell</a> mailing list.</p>
+
+<p>You may also submit issues on the <a href='https://cloud-haskell.atlassian.net/issues/?filter=10002'>JIRA issue tracker</a>.</p>
+
+<h3 id='hello_world'>Hello World</h3>
+
+<p>For a flavour of what programming with <code>Network.Transport</code> looks like, here is a tiny self-contained example.</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='nn'>Network.Transport</span>
+<span class='kr'>import</span> <span class='nn'>Network.Transport.TCP</span> <span class='p'>(</span><span class='nf'>createTransport</span><span class='p'>,</span> <span class='nf'>defaultTCPParameters</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Control.Concurrent</span>
+<span class='kr'>import</span> <span class='nn'>Control.Monad</span>
+<span class='kr'>import</span> <span class='nn'>Data.String</span>
+
+<span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='n'>serverAddr</span> <span class='ow'>&lt;-</span> <span class='n'>newEmptyMVar</span>
+  <span class='n'>clientDone</span> <span class='ow'>&lt;-</span> <span class='n'>newEmptyMVar</span>
+
+  <span class='kt'>Right</span> <span class='n'>transport</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='s'>&quot;127.0.0.1&quot;</span> <span class='s'>&quot;10080&quot;</span> <span class='n'>defaultTCPParameters</span>
+  
+  <span class='c1'>-- &quot;Server&quot;</span>
+  <span class='n'>forkIO</span> <span class='o'>$</span> <span class='kr'>do</span>
+    <span class='kt'>Right</span> <span class='n'>endpoint</span> <span class='ow'>&lt;-</span> <span class='n'>newEndPoint</span> <span class='n'>transport</span>
+    <span class='n'>putMVar</span> <span class='n'>serverAddr</span> <span class='p'>(</span><span class='n'>address</span> <span class='n'>endpoint</span><span class='p'>)</span>
+   
+    <span class='n'>forever</span> <span class='o'>$</span> <span class='kr'>do</span>
+      <span class='n'>event</span> <span class='ow'>&lt;-</span> <span class='n'>receive</span> <span class='n'>endpoint</span>
+      <span class='kr'>case</span> <span class='n'>event</span> <span class='kr'>of</span>
+        <span class='kt'>Received</span> <span class='kr'>_</span> <span class='n'>msg</span> <span class='ow'>-&gt;</span> <span class='n'>print</span> <span class='n'>msg</span>
+        <span class='kr'>_</span> <span class='ow'>-&gt;</span> <span class='n'>return</span> <span class='nb'>()</span> <span class='c1'>-- ignore</span>
+
+  <span class='c1'>-- &quot;Client&quot;</span>
+  <span class='n'>forkIO</span> <span class='o'>$</span> <span class='kr'>do</span>
+    <span class='kt'>Right</span> <span class='n'>endpoint</span> <span class='ow'>&lt;-</span> <span class='n'>newEndPoint</span> <span class='n'>transport</span>
+    <span class='kt'>Right</span> <span class='n'>conn</span>     <span class='ow'>&lt;-</span> <span class='kr'>do</span> <span class='n'>addr</span> <span class='ow'>&lt;-</span> <span class='n'>readMVar</span> <span class='n'>serverAddr</span> 
+                         <span class='n'>connect</span> <span class='n'>endpoint</span> <span class='n'>addr</span> <span class='kt'>ReliableOrdered</span> <span class='n'>defaultConnectHints</span>
+    <span class='n'>send</span> <span class='n'>conn</span> <span class='p'>[</span><span class='n'>fromString</span> <span class='s'>&quot;Hello world&quot;</span><span class='p'>]</span>
+    <span class='n'>putMVar</span> <span class='n'>clientDone</span> <span class='nb'>()</span>
+
+  <span class='c1'>-- Wait for the client to finish</span>
+  <span class='n'>takeMVar</span> <span class='n'>clientDone</span>
+</code></pre></div>
+<p>We create a &#8220;server&#8221; and a &#8220;client&#8221; (each represented by an <code>EndPoint</code>). The server waits for <code>Event</code>s and whenever it receives a message it just prints it to the console; it ignores all other messages. The client sets up a connection to the server, sends a single message, and then signals to the main process that it is done.</p>
+
+<h3 id='more_information'>More Information</h3>
+
+<ul>
+<li><a href='/tutorials/2.nt_tutorial.html'>Programming with Network.Transport</a> introduces <code>Network.Transport</code> from an application developer&#8217;s point of view.</li>
+
+<li><a href='/wiki/newtransports.html'>Creating New Transports</a> describes how to design new instantiations of <code>Network.Transport</code> for other messaging protocols, and describes the TCP transport in some detail as a guiding example.</li>
+
+<li><a href='/wiki/newdesign.html'>New backend and transport design</a> has some notes about the design of the transport layer. Note however that this page is currently out of date.</li>
+</ul>
+
+<h3 id='how_can_i_help'>How can I help?</h3>
+
+<p>If you want to help with the development of <code>Network.Transport</code>, you can help in one of two ways:</p>
+
+<ol>
+<li>Play with the TCP implementation. Do the tutorial <a href='/tutorials/2.nt_tutorial.html'>Programming with Network.Transport</a>. Write some simple applications. Make it break and report the bugs.</li>
+
+<li>If you have domain specific knowledge of other protocols (UDP, MPI, CCI, ZeroMQ, ssh, sctp, RUDP, enet, UDT, etc.) and you think it would be useful to have a Transport implementation for that protocol, then implement it! <a href='/wiki/newtransports.html'>Creating New Transports</a> might be a good place to start. Not only would it be great to have lots of supported protocols, but the implementation of other protocols is also a good test to see if the abstract interface that we provide in <code>Network.Transport</code> is missing anything.</li>
+</ol>
+
+<p>Note however that the goal of <code>Network.Transport</code> is <em>not</em> to provide a general purpose network abstraction layer, but rather it is designed to support certain kinds of applications. <a href='/wiki/newdesign.html'>New backend and transport design</a> contains some notes about this, although it is sadly out of date and describes an older version of the API.</p>
+
+<p>If you are interested in helping out, please add a brief paragraph to <a href='/wiki/protocols.html'>Applications and Other Protocols</a> so that we can coordinate the efforts.</p>
+<hr />
+<h3 id='the_tcp_transport'>The TCP Transport</h3>
+
+<h4 id='overview'>Overview</h4>
+
+<p>When a TCP transport is created a new server is started which listens on a given port number on the local host. In order to support multiple connections the transport maintains a set of channels, one per connection, represented as a pair of a <code>MVar [ByteString]</code> and a list of pairs <code>(ThreadId, Socket)</code> of threads that are listening on this channel. A source end then corresponds to a hostname (the hostname used by clients to identity the local host), port number, and channel ID; a receive end simply corresponds to a channel ID.</p>
+
+<p>When <code>mkTransport</code> creates a new transport it spawns a thread that listens for incoming connections, running <code>procConnections</code> (see below). The set of channels (connections) associated with the transport is initialized to be empty.</p>
+
+<p><code>newConnectionWith</code> creates a new channel and add its to the transport channel map (with an empty list of associated threads).</p>
+
+<p>To serialize the source end we encode the triple of the local host name, port number, and channel ID, and to deserialize we just decode the same triple (deserialize does not need any other properties of the TCP transport).</p>
+
+<p>To connect to the source end we create a new socket, connect to the server at the IP address specified in the TCPConfig, and send the channel number over the connection. Then to <code>closeSourceEnd</code> we simply close the socket, and to send a bunch of byte strings we output them on the socket.</p>
+
+<p>To receive from the target end we just read from the channel associated with the target end. To <code>closeTargetEnd</code> we find kill all threads associated with the channel and close their sockets.</p>
+
+<p>When somebody connects to server (running <code>procConnections</code>), he first sends a channel ID. <code>procConnections</code> then spawns a new thread running <code>procMessages</code> which listens for bytestrings on the socket and output them on the specified channel. The ID of this new thread (and the socket it uses) are added to the channel map of the transport.</p>
+
+<p><code>closeTransport</code> kills the server thread and all threads that were listening on the channels associated with the transport, and closes all associated sockets.</p>
+
+<h4 id='improving_latency'>Improving Latency</h4>
+
+<p>A series of benchmarks has shown that</p>
+
+<ul>
+<li>
+<p>The use of <code>-threaded</code> triples the latency.</p>
+</li>
+
+<li>
+<p>Prepending a header to messages has a negligible effect on latency, even when sending very small packets. However, the way that we turn the length from an <code>Int32</code> to a <code>ByteString</code> <em>does</em> have a significant impact; in particular, using <code>Data.Serialize</code> is very slow (and using Blaze.ByteString not much better). This is fast:</p>
+</li>
+</ul>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>foreign</span> <span class='kr'>import</span> <span class='nn'>ccall</span> <span class='n'>unsafe</span> <span class='s'>&quot;htonl&quot;</span> <span class='n'>htonl</span> <span class='ow'>::</span> <span class='kt'>CInt</span> <span class='ow'>-&gt;</span> <span class='kt'>CInt</span>
+
+<span class='nf'>encodeLength</span> <span class='ow'>::</span> <span class='kt'>Int32</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>ByteString</span>
+<span class='nf'>encodeLength</span> <span class='n'>i32</span> <span class='ow'>=</span>
+  <span class='kt'>BSI</span><span class='o'>.</span><span class='n'>create</span> <span class='mi'>4</span> <span class='o'>$</span> <span class='nf'>\</span><span class='n'>p</span> <span class='ow'>-&gt;</span>
+    <span class='n'>pokeByteOff</span> <span class='n'>p</span> <span class='mi'>0</span> <span class='p'>(</span><span class='n'>htonl</span> <span class='p'>(</span><span class='n'>fromIntegral</span> <span class='n'>i32</span><span class='p'>))</span>
+</code></pre></div>
+<ul>
+<li>
+<p>We do not need to use <code>blaze-builder</code> or related; <code>Network.Socket.Bytestring.sendMany</code> uses vectored I/O. On the client side doing a single <code>recv</code> to try and read the message header and message, rather one to read the header and one to read the payload improves latency, but only by a tiny amount.</p>
+</li>
+
+<li>
+<p>Indirection through an <code>MVar</code> or a <code>Chan</code> does not have an observable effect on latency.</p>
+</li>
+
+<li>
+<p>When two nodes <em>A</em> and <em>B</em> communicate, latency is worse when they communicate over two pairs of sockets (used unidirectionally) rather than one pair (used bidirectionally) by about 20%. This is not improved by using <code>TCP_NODELAY</code>, and might be because <a href='http://lists.freebsd.org/pipermail/freebsd-hackers/2009-March/028006.html' title='2 uni-directional TCP connection good?'>acknowledgements cannot piggyback with payload</a> this way. It might thus be worthwhile to try and reuse TCP connections (or use UDP).</p>
+</li>
+</ul>
+<hr />
+<h3 id='adding_support_for_multicast_to_the_transport_api'>Adding Support for Multicast to the Transport API</h3>
+
+<p>Here we describe various design options for adding support for multicast to the Transport API.</p>
+
+<h4 id='creating_a_new_multicast_group'>Creating a new multicast group</h4>
+
+<p>We can either have this as part of the transport</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>Transport</span> <span class='ow'>=</span> <span class='kt'>Transport</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>newMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>MulticastGroup</span><span class='p'>)</span>
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>MulticastGroup</span> <span class='ow'>=</span> <span class='kt'>MulticastGroup</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>multicastAddress</span>     <span class='ow'>::</span> <span class='kt'>MulticastAddress</span>
+    <span class='p'>,</span> <span class='n'>deleteMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<p>or as part of an endpoint:</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>Transport</span> <span class='ow'>=</span> <span class='kt'>Transport</span> <span class='p'>{</span>
+      <span class='n'>newEndPoint</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>EndPoint</span><span class='p'>)</span>
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>newMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>MulticastGroup</span><span class='p'>)</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<p>It should probably be part of the <code>Transport</code>, as there is no real connection between an endpoint and the creation of the multigroup (however, see section &#8220;Sending messages to a multicast group&#8221;).</p>
+
+<h4 id='subscribing_to_a_multicast_group'>Subscribing to a multicast group</h4>
+
+<p>This should be part of an endpoint; subscribing basically means that the endpoint wants to receive events when multicast messages are sent.</p>
+
+<p>We could reify a subscription:</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>multicastSubscribe</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>MulticastSubscription</span>
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>MulticastSubscription</span> <span class='ow'>=</span> <span class='kt'>MulticastSubscription</span> <span class='p'>{</span>
+      <span class='o'>...</span> 
+      <span class='p'>,</span> <span class='n'>multicastSubscriptionClose</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<p>but this suggests that one might have multiple subscriptions to the same group which can be distinguished, which is misleading. Probably better to have:</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='n'>multicastSubscribe</span>   <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>multicastUnsubscribe</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<h4 id='sending_messages_to_a_multicast_group'>Sending messages to a multicast group</h4>
+
+<p>An important feature of the Transport API is that we are clear about which operations are <em>lightweight</em> and which are not. For instance, creating new endpoints is not lightweight, but opening new connections to endpoints is (as light-weight as possible).</p>
+
+<p>Clearly the creation of a new multicast group is a heavyweight operation. It is less evident however if we can support multiple lightweight &#8220;connections&#8221; to the same multicast group, and if so, whether it is useful.</p>
+
+<p>If we decide that multiple lightweight connections to the multigroup is useful, one option might be</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>connect</span> <span class='ow'>::</span> <span class='kt'>Address</span> <span class='ow'>-&gt;</span> <span class='kt'>Reliability</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>Connection</span><span class='p'>)</span>
+    <span class='p'>,</span> <span class='n'>multicastConnect</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>Connection</span><span class='p'>)</span> 
+  <span class='p'>}</span> 
+
+  <span class='kr'>data</span> <span class='kt'>Connection</span> <span class='ow'>=</span> <span class='kt'>Connection</span> <span class='p'>{</span>
+      <span class='n'>connectionId</span> <span class='ow'>::</span> <span class='kt'>ConnectionId</span> 
+    <span class='p'>,</span> <span class='n'>send</span>         <span class='ow'>::</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>close</span>        <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>maxMsgSize</span>   <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>Int</span> 
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>Event</span> <span class='ow'>=</span> 
+      <span class='kt'>Receive</span> <span class='kt'>ConnectionId</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span>
+    <span class='o'>|</span> <span class='kt'>ConnectionClosed</span> <span class='kt'>ConnectionId</span>
+    <span class='o'>|</span> <span class='kt'>ConnectionOpened</span> <span class='kt'>ConnectionId</span> <span class='kt'>ConnectionType</span> <span class='kt'>Reliability</span> <span class='kt'>Address</span> 
+</code></pre></div>
+<p>The advantage of this approach is it&#8217;s consistency with the rest of the interface. The problem is that with multicast we cannot reliably send any control messages, so we cannot make sure that the subscribers of the multicast group will receive ConnectionOpened events when an endpoint creates a new connection. Since we don&#8217;t support these &#8220;connectionless connections&#8221; anywhere else in the API this seems inconsistent with the rest of the design (this implies that an &#8220;unreliable&#8221; Transport over UDP still needs to have reliable control messages). (On the other hand, if we were going to support reliable multicast protocols, then that would fit this design).</p>
+
+<p>If we don&#8217;t want to support multiple lightweight connections to a multicast group then a better design would be</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+    <span class='p'>,</span> <span class='n'>connect</span>       <span class='ow'>::</span> <span class='kt'>Address</span> <span class='ow'>-&gt;</span> <span class='kt'>Reliability</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>Connection</span><span class='p'>)</span>
+    <span class='p'>,</span> <span class='n'>multicastSend</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+  <span class='p'>}</span> 
+
+  <span class='kr'>data</span> <span class='kt'>Event</span> <span class='ow'>=</span> 
+      <span class='o'>...</span>
+    <span class='o'>|</span> <span class='kt'>MulticastReceive</span> <span class='kt'>Address</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span>
+</code></pre></div>
+<p>or alternatively</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>resolveMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>MulticastGroup</span><span class='p'>)</span> 
+    <span class='p'>}</span> 
+
+  <span class='kr'>data</span> <span class='kt'>MulticastGroup</span> <span class='ow'>=</span> <span class='kt'>MulticastGroup</span> <span class='p'>{</span>
+    <span class='p'>,</span> <span class='o'>...</span>
+    <span class='p'>,</span> <span class='n'>send</span> <span class='ow'>::</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<p>If we do this however we need to make sure that newGroup is part an <code>EndPoint</code>, not the <code>Transport</code>, otherwise <code>send</code> will not know the source of the message. The version with <code>resolveMulticastGroup</code> has the additional benefit that in &#8220;real&#8221; implementations we will probably need to allocate some resources before we can send to the multicast group, and need to deallocate these resources at some point too.</p>
+
+<h3 id='the_current_solution'>The current solution</h3>
+
+<p>The above considerations lead to the following tentative proposal:</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='kr'>data</span> <span class='kt'>Transport</span> <span class='ow'>=</span> <span class='kt'>Transport</span> <span class='p'>{</span>
+      <span class='n'>newEndPoint</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>EndPoint</span><span class='p'>)</span>
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>EndPoint</span> <span class='ow'>=</span> <span class='kt'>EndPoint</span> <span class='p'>{</span>
+      <span class='n'>receive</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='kt'>Event</span>
+    <span class='p'>,</span> <span class='n'>address</span> <span class='ow'>::</span> <span class='kt'>Address</span> 
+    <span class='p'>,</span> <span class='n'>connect</span> <span class='ow'>::</span> <span class='kt'>Address</span> <span class='ow'>-&gt;</span> <span class='kt'>Reliability</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>Connection</span><span class='p'>)</span>
+    <span class='p'>,</span> <span class='n'>newMulticastGroup</span>     <span class='ow'>::</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>MulticastGroup</span><span class='p'>)</span>
+    <span class='p'>,</span> <span class='n'>resolveMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>MulticastAddress</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>Error</span> <span class='kt'>MulticastGroup</span><span class='p'>)</span>
+    <span class='p'>}</span> 
+
+  <span class='kr'>data</span> <span class='kt'>Connection</span> <span class='ow'>=</span> <span class='kt'>Connection</span> <span class='p'>{</span>
+      <span class='n'>send</span>  <span class='ow'>::</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>close</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+
+  <span class='kr'>data</span> <span class='kt'>Event</span> <span class='ow'>=</span> 
+      <span class='kt'>Receive</span> <span class='kt'>ConnectionId</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span>
+    <span class='o'>|</span> <span class='kt'>ConnectionClosed</span> <span class='kt'>ConnectionId</span>
+    <span class='o'>|</span> <span class='kt'>ConnectionOpened</span> <span class='kt'>ConnectionId</span> <span class='kt'>Reliability</span> <span class='kt'>Address</span> 
+    <span class='o'>|</span> <span class='kt'>MulticastReceive</span> <span class='kt'>MulticastAddress</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span>
+
+  <span class='kr'>data</span> <span class='kt'>MulticastGroup</span> <span class='ow'>=</span> <span class='kt'>MulticastGroup</span> <span class='p'>{</span>
+      <span class='n'>multicastAddress</span>     <span class='ow'>::</span> <span class='kt'>MulticastAddress</span>
+    <span class='p'>,</span> <span class='n'>deleteMulticastGroup</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>maxMsgSize</span>           <span class='ow'>::</span> <span class='kt'>Maybe</span> <span class='kt'>Int</span> 
+    <span class='p'>,</span> <span class='n'>multicastSend</span>        <span class='ow'>::</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>multicastSubscribe</span>   <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>multicastUnsubscribe</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>,</span> <span class='n'>multicastClose</span>       <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+    <span class='p'>}</span>
+</code></pre></div>
+<p>where <code>multicastClose</code> indicates to the runtime that this endpoint no longer wishes to send to this multicast group, and we can therefore deallocate the resources we needed to send to the group (these resources can be allocated on <code>resolveMulticastGroup</code> or on the first <code>multicastSend</code>; the advantage of the latter is that is somebody resolves a group only to subscribe to it, not to send to it, we don&#8217;t allocate any unneeded resources).</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+

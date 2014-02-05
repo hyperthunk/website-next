@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
         <meta charset="utf-8">
-    <title>About</title>
+    <title>Cloud Haskell Wiki</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Tim Watson"> 
@@ -32,12 +32,12 @@
 -->
 
     <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
     </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
         <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -128,26 +128,96 @@
     </div>
 
     <div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li class="active">About</li>
-  </ul>
-</div>
-<div class="container">
-  Cloud Haskell is cool
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='welcome'>Welcome</h3>
 
-<div class="hero-unit">
-  <h1>Install Cloud Haskell</h1>
-  <p>You can retrieve the latest version of Cloud Haskell from github.</p>
-  <p>
-    <a class="btn btn-primary" href="http://github.com/haskell-distributed">
-      View on Github
-    </a>
-  </p>
-</div>
+<p>Welcome to the Cloud Haskell Wiki. Navigate to specific pages using the links on the left. If you wish to edit or add to the pages in this wiki, read on.</p>
 
-</div> <!-- /container -->
+<h3 id='editing'>Editing</h3>
 
+<p>Editing the wiki is pretty simple. This entire website is stored in a git repository and its dynamic content rendered by github pages using <a href='https://github.com/mojombo/jekyll'>Jekyll</a>. You can clone the repository <a href='https://github.com/haskell-distributed/haskell-distributed.github.com'>here</a>. Instructions for using jekyll are available <a href='https://github.com/mojombo/jekyll'>online</a>, but in general it&#8217;s just a matter of finding the right markdown file. Wiki content is all located in the wiki subfolder.</p>
+
+<h3 id='adding_new_content'>Adding new content</h3>
+
+<p>New wiki pages need to have some specific fields in their <a href='https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter'>Yaml Front Matter</a>. There is a makefile in the root directory which will create a wiki page for you (in the wiki directory) and populate the front matter for you. Calling the makefile is pretty easy.</p>
+<div class='highlight'><pre><code class='bash'>make wikipage <span class='nv'>NAME</span><span class='o'>=</span>&lt;pagename&gt;
+</code></pre></div>
+        </div>
+      </div>
+    </div>
         <footer class="footer">
       <div class="container">
         <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>

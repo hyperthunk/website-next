@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Programming with Network.Transport</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#">Tutorial</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="#introduction"><i class="icon-chevron-right"></i> Introduction</a></li>
+              <li><a href="#the_network_transport_api"><i class="icon-chevron-right"></i> The network-transport API</a></li>
+              <li><a href="#writing_the_client"><i class="icon-chevron-right"></i> Writing the client</a></li>
+              <li><a href="#writing_the_server"><i class="icon-chevron-right"></i> Writing the server</a></li>
+              <li><a href="#conclusion"><i class="icon-chevron-right"></i> Conclusion</a></li>
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='introduction'>Introduction</h3>
+
+<p>This is a tutorial introduction to <code>Network.Transport</code>. To follow along, you should probably already be familiar with <code>Control.Concurrent</code>; in particular, the use of <code>fork</code> and <code>MVar</code>s. The code for the tutorial can be downloaded as <a href='/static/tutorial/tutorial-server.hs'>tutorial-server.hs</a> and <a href='/static/tutorial/tutorial-client.hs'>tutorial-client.hs</a>.</p>
+<hr />
+<h3 id='the_network_transport_api'>The Network Transport API</h3>
+
+<p>Network.Transport is a network abstraction layer which offers the following concepts:</p>
+
+<ul>
+<li>Nodes in the network are represented by <code>EndPoint</code>s. These are heavyweight stateful objects.</li>
+
+<li>Each <code>EndPoint</code> has an <code>EndPointAddress</code>.</li>
+
+<li>Connections can be established from one <code>EndPoint</code> to another using the <code>EndPointAddress</code> of the remote end.</li>
+
+<li>The <code>EndPointAddress</code> can be serialised and sent over the network, where as <code>EndPoint</code>s and connections cannot.</li>
+
+<li>Connections between <code>EndPoint</code>s are unidirectional and lightweight.</li>
+
+<li>Outgoing messages are sent via a <code>Connection</code> object that represents the sending end of the connection.</li>
+
+<li>Incoming messages for <strong>all</strong> of the incoming connections on an <code>EndPoint</code> are collected via a shared receive queue.</li>
+
+<li>In addition to incoming messages, <code>EndPoint</code>s are notified of other <code>Event</code>s such as new connections or broken connections.</li>
+</ul>
+
+<p>In this tutorial we will create a simple &#8220;echo&#8221; server. Whenever a client opens a new connection to the server, the server in turns opens a connection back to the client. All messages that the client sends to the server will echoed by the server back to the client.</p>
+
+<p>Here is what it will look like. We can start the server on one host:</p>
+<div class='highlight'><pre><code class='bash'><span class='c'># ./tutorial-server 192.168.1.108 8080</span>
+Echo server started at <span class='s2'>&quot;192.168.1.108:8080:0&quot;</span>
+</code></pre></div>
+<p>then start the client on another. The client opens a connection to the server, sends &#8220;Hello world&#8221;, and prints all the <code>Events</code> it receives:</p>
+<div class='highlight'><pre><code class='bash'><span class='c'># ./tutorial-client 192.168.1.109 8080 192.168.1.108:8080:0</span>
+ConnectionOpened 1024 ReliableOrdered <span class='s2'>&quot;192.168.1.108:8080:0&quot;</span>
+Received 1024 <span class='o'>[</span><span class='s2'>&quot;Hello world&quot;</span><span class='o'>]</span>
+ConnectionClosed 1024
+</code></pre></div>
+<p>The client receives three <code>Event</code>s:</p>
+
+<ol>
+<li>The server (with address &#8220;192.168.1.108:8080:0&#8221;) opened a connection back to the client. The ID of this connection is 1024, and the connection is reliable and ordered (see below).</li>
+
+<li>Received a message on connection 1024: that is, on the connection the server just opened. This is the server echoing the message we sent.</li>
+
+<li>Connection 1024 was closed.</li>
+</ol>
+
+<p>Note that the server prints its address (&#8220;192.168.1.108:8080:0&#8221;) to the console when started and this must be passed explicitly as an argument to the client. Peer discovery and related issues are outside the scope of <code>Network.Transport</code>.</p>
+
+<h3 id='writing_the_client'>Writing the client</h3>
+
+<p>We will start with the client (<a href='https://github.com/haskell-distributed/distributed-process/blob/master/doc/tutorial/tutorial-client.hs'>tutorial-client.hs</a>), because it is simpler. We first need a bunch of imports:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='nn'>Network.Transport</span>
+<span class='kr'>import</span> <span class='nn'>Network.Transport.TCP</span> <span class='p'>(</span><span class='nf'>createTransport</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>System.Environment</span>
+<span class='kr'>import</span> <span class='nn'>Data.ByteString.Char8</span>
+<span class='kr'>import</span> <span class='nn'>Control.Monad</span>
+</code></pre></div>
+<p>The client will consist of a single main function.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+</code></pre></div>
+<p>When we start the client we expect three command line arguments. Since the client will itself be a network endpoint, we need to know the IP address and port number to use for the client. Moreover, we need to know the endpoint address of the server (the server will print this address to the console when it is started):</p>
+<div class='highlight'><pre><code class='haskell'><span class='p'>[</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>port</span><span class='p'>,</span> <span class='n'>serverAddr</span><span class='p'>]</span> <span class='ow'>&lt;-</span> <span class='n'>getArgs</span>
+</code></pre></div>
+<p>Next we need to initialize the Network.Transport layer using <code>createTransport</code> from <code>Network.Transport.TCP</code> (in this tutorial we will use the TCP instance of <code>Network.Transport</code>). The type of <code>createTransport</code> is:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>createTransport</span> <span class='ow'>::</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>HostName</span> <span class='ow'>-&gt;</span> <span class='kt'>N</span><span class='o'>.</span><span class='kt'>ServiceName</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>IOException</span> <span class='kt'>Transport</span><span class='p'>)</span>
+</code></pre></div>
+<p>(where <code>N</code> is an alias for <code>Network.Socket</code>). For the sake of this tutorial we are going to ignore all error handling, so we are going to assume it will return a <code>Right</code> transport:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kt'>Right</span> <span class='n'>transport</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='n'>host</span> <span class='n'>port</span> 
+</code></pre></div>
+<p>Next we need to create an EndPoint for the client. Again, we are going to ignore errors:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kt'>Right</span> <span class='n'>endpoint</span>  <span class='ow'>&lt;-</span> <span class='n'>newEndPoint</span> <span class='n'>transport</span>
+</code></pre></div>
+<p>Now that we have an endpoint we can connect to the server, after we convert the <code>String</code> we got from <code>getArgs</code> to an <code>EndPointAddress</code>:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>let</span> <span class='n'>addr</span> <span class='ow'>=</span> <span class='kt'>EndPointAddress</span> <span class='p'>(</span><span class='n'>pack</span> <span class='n'>serverAddr</span><span class='p'>)</span>
+<span class='kt'>Right</span> <span class='n'>conn</span> <span class='ow'>&lt;-</span> <span class='n'>connect</span> <span class='n'>endpoint</span> <span class='n'>addr</span> <span class='kt'>ReliableOrdered</span> <span class='n'>defaultConnectHints</span>
+</code></pre></div>
+<p><code>ReliableOrdered</code> means that the connection will be reliable (no messages will be lost) and ordered (messages will arrive in order). For the case of the TCP transport this makes no difference (_all_ connections are reliable and ordered), but this may not be true for other transports.</p>
+
+<p>Sending on our new connection is very easy:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>send</span> <span class='n'>conn</span> <span class='p'>[</span><span class='n'>pack</span> <span class='s'>&quot;Hello world&quot;</span><span class='p'>]</span>
+</code></pre></div>
+<p>(<code>send</code> takes as argument an array of <code>ByteString</code>s). Finally, we can close the connection:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>close</span> <span class='n'>conn</span>
+</code></pre></div>
+<p>Function <code>receive</code> can be used to get the next event from an endpoint. To print the first three events, we can do</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>replicateM_</span> <span class='mi'>3</span> <span class='o'>$</span> <span class='n'>receive</span> <span class='n'>endpoint</span> <span class='o'>&gt;&gt;=</span> <span class='n'>print</span>
+</code></pre></div>
+<p>Since we&#8217;re not expecting more than 3 events, we can now close the transport.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>closeTransport</span> <span class='n'>transport</span>
+</code></pre></div>
+<p>That&#8217;s it! Here is the entire client again:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='p'>[</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>port</span><span class='p'>,</span> <span class='n'>serverAddr</span><span class='p'>]</span> <span class='ow'>&lt;-</span> <span class='n'>getArgs</span>
+  <span class='kt'>Right</span> <span class='n'>transport</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='n'>host</span> <span class='n'>port</span> 
+  <span class='kt'>Right</span> <span class='n'>endpoint</span>  <span class='ow'>&lt;-</span> <span class='n'>newEndPoint</span> <span class='n'>transport</span>
+
+  <span class='kr'>let</span> <span class='n'>addr</span> <span class='ow'>=</span> <span class='kt'>EndPointAddress</span> <span class='p'>(</span><span class='n'>fromString</span> <span class='n'>serverAddr</span><span class='p'>)</span>
+  <span class='kt'>Right</span> <span class='n'>conn</span> <span class='ow'>&lt;-</span> <span class='n'>connect</span> <span class='n'>endpoint</span> <span class='n'>addr</span> <span class='kt'>ReliableOrdered</span> <span class='n'>defaultConnectHints</span>
+  <span class='n'>send</span> <span class='n'>conn</span> <span class='p'>[</span><span class='n'>fromString</span> <span class='s'>&quot;Hello world&quot;</span><span class='p'>]</span>
+  <span class='n'>close</span> <span class='n'>conn</span>
+
+  <span class='n'>replicateM_</span> <span class='mi'>3</span> <span class='o'>$</span> <span class='n'>receive</span> <span class='n'>endpoint</span> <span class='o'>&gt;&gt;=</span> <span class='n'>print</span> 
+
+  <span class='n'>closeTransport</span> <span class='n'>transport</span>
+</code></pre></div>
+<h3 id='writing_the_server'>Writing the server</h3>
+
+<p>The server (<a href='https://github.com/haskell-distributed/distributed-process/blob/master/doc/tutorial/tutorial-server.hs'>tutorial-server.hs</a>) is slightly more complicated, but only slightly. As with the client, we start with a bunch of imports:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='nn'>Network.Transport</span>
+<span class='kr'>import</span> <span class='nn'>Network.Transport.TCP</span> <span class='p'>(</span><span class='nf'>createTransport</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Control.Concurrent</span>
+<span class='kr'>import</span> <span class='nn'>Data.Map</span>
+<span class='kr'>import</span> <span class='nn'>Control.Exception</span>
+<span class='kr'>import</span> <span class='nn'>System.Environment</span>
+</code></pre></div>
+<p>We will write the main function first:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='p'>[</span><span class='n'>host</span><span class='p'>,</span> <span class='n'>port</span><span class='p'>]</span>    <span class='ow'>&lt;-</span> <span class='n'>getArgs</span>
+  <span class='n'>serverDone</span>      <span class='ow'>&lt;-</span> <span class='n'>newEmptyMVar</span>
+  <span class='kt'>Right</span> <span class='n'>transport</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='n'>host</span> <span class='n'>port</span> 
+  <span class='kt'>Right</span> <span class='n'>endpoint</span>  <span class='ow'>&lt;-</span> <span class='n'>newEndPoint</span> <span class='n'>transport</span>
+  <span class='n'>forkIO</span> <span class='o'>$</span> <span class='n'>echoServer</span> <span class='n'>endpoint</span> <span class='n'>serverDone</span> 
+  <span class='n'>putStrLn</span> <span class='o'>$</span> <span class='s'>&quot;Echo server started at &quot;</span> <span class='o'>++</span> <span class='n'>show</span> <span class='p'>(</span><span class='n'>address</span> <span class='n'>endpoint</span><span class='p'>)</span>
+  <span class='n'>readMVar</span> <span class='n'>serverDone</span> <span class='p'>`</span><span class='n'>onCtrlC</span><span class='p'>`</span> <span class='n'>closeTransport</span> <span class='n'>transport</span>
+</code></pre></div>
+<p>This is very similar to the <code>main</code> function for the client. We get the hostname and port number that the server should use and create a transport and an endpoint. Then we fork a thread to do the real work. We will write <code>echoServer</code> next; for now, suffices to note that <code>echoServer</code> will signal on the MVar <code>serverDone</code> when it completes, so that the main thread knows when to exit. Don&#8217;t worry about <code>onCtrlC</code> for now; it does what the name suggests.</p>
+
+<p>The goal of <code>echoServer</code> is simple: whenever somebody opens a connection to us, open a connection to them; whenever somebody sends us a message, echo that message; and whenever somebody closes their connection to us, we are going to close our connection to them.</p>
+
+<p><code>Event</code> is defined in <code>Network.Transport</code> as</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>data</span> <span class='kt'>Event</span> <span class='ow'>=</span> 
+    <span class='kt'>Received</span> <span class='kt'>ConnectionId</span> <span class='p'>[</span><span class='kt'>ByteString</span><span class='p'>]</span>
+  <span class='o'>|</span> <span class='kt'>ConnectionClosed</span> <span class='kt'>ConnectionId</span>
+  <span class='o'>|</span> <span class='kt'>ConnectionOpened</span> <span class='kt'>ConnectionId</span> <span class='kt'>Reliability</span> <span class='kt'>EndPointAddress</span> 
+  <span class='o'>|</span> <span class='kt'>EndPointClosed</span>
+  <span class='o'>...</span>
+</code></pre></div>
+<p>(there are few other events, which we are going to ignore). <code>ConnectionId</code>s help us distinguish messages sent on one connection from messages sent on another. In <code>echoServer</code> we are going to maintain a mapping from those <code>ConnectionId</code>s to the connections that we will use to reply:</p>
+
+<ul>
+<li>Whenever somebody opens a connection, we open a connection in the other direction and add it to the map.</li>
+
+<li>Whenever we receive a message, we lookup the corresponding return connection and echo the message back.</li>
+
+<li>Whenever somebody closes the connection, we lookup and close the corresponding return connection.</li>
+</ul>
+
+<p>Finally, when we receive the <code>EndPointClosed</code> message we signal to the main thread that we are doing and terminate. We will receive this message when the main thread calls <code>closeTransport</code> (that is, when the user presses Control-C).</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>echoServer</span> <span class='ow'>::</span> <span class='kt'>EndPoint</span> <span class='ow'>-&gt;</span> <span class='kt'>MVar</span> <span class='nb'>()</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>echoServer</span> <span class='n'>endpoint</span> <span class='n'>serverDone</span> <span class='ow'>=</span> <span class='n'>go</span> <span class='n'>empty</span>
+  <span class='kr'>where</span>
+    <span class='n'>go</span> <span class='ow'>::</span> <span class='kt'>Map</span> <span class='kt'>ConnectionId</span> <span class='p'>(</span><span class='kt'>MVar</span> <span class='kt'>Connection</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span> 
+    <span class='n'>go</span> <span class='n'>cs</span> <span class='ow'>=</span> <span class='kr'>do</span>
+      <span class='n'>event</span> <span class='ow'>&lt;-</span> <span class='n'>receive</span> <span class='n'>endpoint</span>
+      <span class='kr'>case</span> <span class='n'>event</span> <span class='kr'>of</span>
+        <span class='kt'>ConnectionOpened</span> <span class='n'>cid</span> <span class='n'>rel</span> <span class='n'>addr</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+          <span class='n'>connMVar</span> <span class='ow'>&lt;-</span> <span class='n'>newEmptyMVar</span>
+          <span class='n'>forkIO</span> <span class='o'>$</span> <span class='kr'>do</span>
+            <span class='kt'>Right</span> <span class='n'>conn</span> <span class='ow'>&lt;-</span> <span class='n'>connect</span> <span class='n'>endpoint</span> <span class='n'>addr</span> <span class='n'>rel</span> <span class='n'>defaultConnectHints</span>
+            <span class='n'>putMVar</span> <span class='n'>connMVar</span> <span class='n'>conn</span> 
+          <span class='n'>go</span> <span class='p'>(</span><span class='n'>insert</span> <span class='n'>cid</span> <span class='n'>connMVar</span> <span class='n'>cs</span><span class='p'>)</span> 
+        <span class='kt'>Received</span> <span class='n'>cid</span> <span class='n'>payload</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+          <span class='n'>forkIO</span> <span class='o'>$</span> <span class='kr'>do</span>
+            <span class='n'>conn</span> <span class='ow'>&lt;-</span> <span class='n'>readMVar</span> <span class='p'>(</span><span class='n'>cs</span> <span class='o'>!</span> <span class='n'>cid</span><span class='p'>)</span>
+            <span class='n'>send</span> <span class='n'>conn</span> <span class='n'>payload</span> 
+            <span class='n'>return</span> <span class='nb'>()</span>
+          <span class='n'>go</span> <span class='n'>cs</span>
+        <span class='kt'>ConnectionClosed</span> <span class='n'>cid</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span> 
+          <span class='n'>forkIO</span> <span class='o'>$</span> <span class='kr'>do</span>
+            <span class='n'>conn</span> <span class='ow'>&lt;-</span> <span class='n'>readMVar</span> <span class='p'>(</span><span class='n'>cs</span> <span class='o'>!</span> <span class='n'>cid</span><span class='p'>)</span>
+            <span class='n'>close</span> <span class='n'>conn</span> 
+          <span class='n'>go</span> <span class='p'>(</span><span class='n'>delete</span> <span class='n'>cid</span> <span class='n'>cs</span><span class='p'>)</span> 
+        <span class='kt'>EndPointClosed</span> <span class='ow'>-&gt;</span> <span class='kr'>do</span>
+          <span class='n'>putStrLn</span> <span class='s'>&quot;Echo server exiting&quot;</span>
+          <span class='n'>putMVar</span> <span class='n'>serverDone</span> <span class='nb'>()</span>
+</code></pre></div>
+<p>This implements almost exactly what we described above. The only complication is that we want to avoid blocking the receive queue; so for every message that comes in we spawn a new thread to deal with it. Since is therefore possible that we receive the <code>Received</code> event before an outgoing connection has been established, we map connection IDs to MVars containing connections.</p>
+
+<p>Finally, we need to define <code>onCtrlC</code>; <code>p onCtrlC q</code> will run <code>p</code>; if this is interrupted by Control-C we run <code>q</code> and then try again:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>onCtrlC</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='n'>a</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='n'>a</span>
+<span class='nf'>p</span> <span class='p'>`</span><span class='n'>onCtrlC</span><span class='p'>`</span> <span class='n'>q</span> <span class='ow'>=</span> <span class='n'>catchJust</span> <span class='n'>isUserInterrupt</span> <span class='n'>p</span> <span class='p'>(</span><span class='n'>const</span> <span class='o'>$</span> <span class='n'>q</span> <span class='o'>&gt;&gt;</span> <span class='n'>p</span> <span class='p'>`</span><span class='n'>onCtrlC</span><span class='p'>`</span> <span class='n'>q</span><span class='p'>)</span>
+  <span class='kr'>where</span>
+    <span class='n'>isUserInterrupt</span> <span class='ow'>::</span> <span class='kt'>AsyncException</span> <span class='ow'>-&gt;</span> <span class='kt'>Maybe</span> <span class='nb'>()</span> 
+    <span class='n'>isUserInterrupt</span> <span class='kt'>UserInterrupt</span> <span class='ow'>=</span> <span class='kt'>Just</span> <span class='nb'>()</span>
+    <span class='n'>isUserInterrupt</span> <span class='kr'>_</span>             <span class='ow'>=</span> <span class='kt'>Nothing</span>
+</code></pre></div>
+<h3 id='conclusion'>Conclusion</h3>
+
+<p>In this tutorial, we have implemented a small echo client and server to illustrate how the <code>Network.Transport</code> abstraction layer can be used.</p>
+<!-- would it be possible to have some a sentence or two of commentary here about N.T? -->
+<p>See the <a href='https://github.com/haskell-distributed/distributed-process/wiki/Network.Transport'><code>Network.Transport</code> wiki page</a> for more details.</p>
+<!-- are there links to other things people who read this tutorial would want to know about? -->
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>

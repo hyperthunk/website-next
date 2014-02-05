@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
         <meta charset="utf-8">
-    <title>About</title>
+    <title>Cloud Haskell Team</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Tim Watson"> 
@@ -32,12 +32,12 @@
 -->
 
     <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
     </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
         <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -128,26 +128,47 @@
     </div>
 
     <div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li class="active">About</li>
-  </ul>
-</div>
-<div class="container">
-  Cloud Haskell is cool
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a> <span class="divider">/</span></li>
+          <li><a href="#">Cloud Haskell Team</a> <span class="divider">/</span></li>
+        </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="#origins"><i class="icon-chevron-right"></i> Cloud Haskell Origins</a></li>
+              <li><a href="#well_typed"><i class="icon-chevron-right"></i> Well-Typed</a></li>
+              <li><a href="#maintainers"><i class="icon-chevron-right"></i> Community Maintainers</a></li>
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='origins'>Origins</h3>
 
-<div class="hero-unit">
-  <h1>Install Cloud Haskell</h1>
-  <p>You can retrieve the latest version of Cloud Haskell from github.</p>
-  <p>
-    <a class="btn btn-primary" href="http://github.com/haskell-distributed">
-      View on Github
-    </a>
-  </p>
-</div>
+<p>Cloud Haskell was originally the brainchild of Jeff Epstein, Simon Peyton Jones and Dr Andrew Black, whose joint paper for the Tokyo Haskell Symposium <a href='http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf'>Towards Haskell in the Cloud</a>, was expanded in Epstein&#8217;s 2011 masters thesis <a href='http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/epstein-thesis.pdf'>Functional programming for the data centre</a>.</p>
 
-</div> <!-- /container -->
+<p><a href='https://github.com/jepst'>Jeff</a> wrote the original implementation of Cloud Haskell, which is still available in the published <a href='http://hackage.haskell.org/package/remote-0.1.1'>remote package</a>.</p>
 
+<h3 id='well_typed'>Well Typed</h3>
+
+<p><a href='http://www.well-typed.com'>Well-Typed</a> is a consultancy specialising in Haskell/GHC development. A team of developers from Well-Typed rewrote Jeff&#8217;s <a href='http://hackage.haskell.org/package/remote-0.1.1'>remote</a> package from the ground up as part of the <a href='http://www.haskell.org/haskellwiki/Parallel_GHC_Project'>Parallel Haskell Project</a>. Well-Typed remain closely involved in Cloud Haskell.</p>
+
+<h3 id='maintainers'>Maintainers</h3>
+
+<p><a href='https://github.com/hyperthunk'>Tim Watson</a> and <a href='https://github.com/jepst'>Jeff Epstein</a> are currently the <a href='http://hackage.haskell.org/trac/ghc/wiki/Contributors'>official maintainers</a> of Cloud Haskell as a whole. <a href='https://github.com/edsko'>Edsko De Vries</a>, a member of Well-Typed and the author of much of the new implementation we have today, is still closely involved as well.</p>
+
+<p><a href='https://github.com/hyperthunk'>Tim</a> is the primary author and maintainer of <a href='https://github.com/haskell-distributed/disributed-process-platform'>disributed-process-platform</a>; an effort to port many of the benefits of Erlang&#8217;s <a href='http://en.wikipedia.org/wiki/Open_Telecom_Platform'>Open Telecom Platform</a> to the Cloud Haskell ecosystem.</p>
+
+<p><a href='https://github.com/jepst'>Jeff</a> is the author of <a href='https://github.com/jepst/distributed-process-global'>distributed-process-global</a>, a re-implementation of Erlang&#8217;s <a href='http://www.erlang.org/doc/man/global.html'>global</a> (locking, registration and cluster management) API for Cloud Haskell.</p>
+
+<p>A number of other community members have contributed to the new implementation, in various ways - here are at least some of them:</p>
+
+<p>Duncan Coutts, Simon Marlow, Ryan Newton, Eric Kow, Adam Foltzer, Nicolas Wu @rodlogic (github), Takayuki Muranushi, Alen Ribic, Pankaj More, Mark Wright</p>
+        </div>
+      </div>
+    </div>
         <footer class="footer">
       <div class="container">
         <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>

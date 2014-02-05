@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Maintainers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='maintainers'>Maintainers</h3>
+
+<p>This part of the guide is specifically for maintainers, and outlines the development process and in particular, the branching strategy. We also point out Cloud Haskell&#8217;s various bits of infrastructure as they stand at the moment.</p>
+
+<p>Perhaps the most important thing to do as a maintainer, is to make other developers aware of what you&#8217;re working on by assigning the Jira issue to yourself!</p>
+<hr />
+<h4 id='releases'>Releases</h4>
+
+<p>All releases are published to <a href='http://hackage.haskell.org'>hackage</a>. At some point we may start to make <em>nightly builds</em> available on this website.</p>
+<hr />
+<h4 id='community'>Community</h4>
+
+<p>We keep in touch through the <a href='https://groups.google.com/forum/?fromgroups=#!forum/parallel-haskell'>parallel-haskell google group</a>, and once you&#8217;ve joined the group, by posting to the mailing list address: parallel-haskell@googlegroups.com. This is a group for <strong>all</strong> things related to concurrent and parallel Haskell. There is also a maintainer/developer centric <a href='https://groups.google.com/forum/?fromgroups#!forum/cloud-haskell-developers'>cloud-haskell-developers google group</a>, which is more for in-depth questions about contributing to or maintaining Cloud Haskell.</p>
+
+<p>You might also find some of us hanging out at #haskell-distributed on freenode from time to time.</p>
+
+<p>We have a twitter account! <a href='https://twitter.com/CloudHaskell'>@CloudHaskell</a> will be used to make announcements (of new releases, etc) on a regular basis.</p>
+<hr />
+<h3 id='bugissue_tracking_and_continuous_integration'>Bug/Issue Tracking and Continuous Integration</h3>
+
+<p>Our bug tracker is a hosted/on-demand Jira, for which a free open source project license was kindly donated by <a href='http://atlassian.com/'>Atlassian</a>. You can browse all issues without logging in, however to report new issues/bugs you will need to provide an email address and create an account.</p>
+
+<p>If you have any difficulties doing so, please post an email to the <a href='https://groups.google.com/forum/?fromgroups=#!forum/parallel-haskell'>parallel-haskell mailing list</a> at parallel-haskell@googlegroups.com.</p>
+
+<p>We currently use <a href='https://travis-ci.org/'>travis-ci</a> for continuous integration. We do however, have an open source license for Atlassian Bamboo, which we will be migrating to over time - this process is quite involved so we don&#8217;t have a picture of the timescales yet.</p>
+<hr />
+<h3 id='branchingmerging_policy'>Branching/Merging Policy</h3>
+
+<p>The master branch is the <strong>stable</strong> branch, and should always be in a <em>releasable</em> state. This means that on the whole, only small self contained commits or topic branch merges should be applied to master, and tagged releases should always be made against it.</p>
+
+<h4 id='tagging_releases'>Tagging Releases</h4>
+
+<p>A release tag should be of the form <code>x.y.z</code> and should <strong>not</strong> be prefixed with the repository name. Older tags use the latter form as they date from a time when all the Cloud Haskell source code lived under one git repository.</p>
+
+<h4 id='development_branches'>Development Branches</h4>
+
+<p>Ongoing work can either be merged into master when complete or merged into development. Development is effectively an integration branch, to make sure ongoing changes and new features play nicely with one another. On the other hand, master is a &#8216;stable&#8217; branch and therefore you should only merge into it if the result will be releasable.</p>
+
+<p>In general, we try to merge changes that belong to a major version upgrade into development, whereas changes that will go into the next minor version upgrade can be merged into master.</p>
+
+<h4 id='keeping_history'>Keeping History</h4>
+
+<p>Try to make only clean commits, so that bisect will continue to work. At the same time, it&#8217;s best to avoid making destructive updates. If you&#8217;re planning on doing lots of squashing, then work in a branch and don&#8217;t commit directly to development - and <strong>definitely</strong> not to master.</p>
+
+<h4 id='committing_without_triggering_ci_builds'>Committing without triggering CI builds</h4>
+
+<p>Whilst we&#8217;re on travis-ci, you can do this by putting the text <code>[ci skip]</code> anywhere in the commit message. Please, please <strong>do not</strong> put this on the first line of the commit message.</p>
+
+<p>Once we migrate to Bamboo, this may change.</p>
+
+<h4 id='changing_jira_bugsissues_via_commit_messages'>Changing Jira bugs/issues via commit messages</h4>
+
+<p>You can make complex changes to one or more Jira issues with a single commit message. As with skipping CI builds, please <strong>do not</strong> put this messy text into the first line of your commit messages.</p>
+
+<p>Details of the format/syntax required to do this can be found on <a href='https://confluence.atlassian.com/display/AOD/Processing+JIRA+issues+with+commit+messages'>this Jira documentation page</a></p>
+<hr />
+<h4 id='follow_the_'>Follow the <a href='/wiki/contributing.html'>Contributing guidelines</a></h4>
+
+<p>What&#8217;s good for the goose&#8230;</p>
+
+<h4 id='making_api_documentation_available_on_the_website'>Making API documentation available on the website</h4>
+
+<p>Currently this is a manual process. If you don&#8217;t sed/awk out the reference/link paths, it&#8217;ll be a mess. We will add a script to handle this some time soon. I tend to only update the static documentation for d-p and d-p-platform, at least until the process has been automated. I also do this <em>only</em> for mainline branches (i.e., for development and master), although again, automation could solve a lot of issues there.</p>
+
+<p>There is also an open ticket to set up nightly builds, which will update the HEAD haddocks (on the website) and produce an &#8216;sdist&#8217; bundle and add that to the website too.</p>
+
+<p>See https://cloud-haskell.atlassian.net/browse/INFRA-1 for details.</p>
+
+<h3 id='release_process'>Release Process</h3>
+
+<p>First of all, a few prior warnings. <strong>Do not</strong> tag any projects until <em>after</em> you&#8217;ve finished the release. If you build and tag three projects, only to find that a subsequent dependent package needs a bit of last minute surgery, you&#8217;ll be sorry you didn&#8217;t wait. With that in mind&#8230;.</p>
+
+<p>Before releasing any source code, make sure that all the jira tickets added to the release are either resolved or remove them from the release if you&#8217;ve decided to exclude them.</p>
+
+<p>First, make sure all the version numbers and dependencies are aligned.</p>
+
+<ul>
+<li>bump the version numbers for each project that is being released</li>
+
+<li>bump the dependency versions across each project if needed</li>
+
+<li>make sure you&#8217;ve run a complete integration build and everything still installs ok</li>
+
+<li>bump the dependency version numbers in the cloud-haskell meta package</li>
+</ul>
+
+<p>Now you&#8217;ll want to go and update the change log and release notes for each project. Change logs are stored in the individual project&#8217;s git repository, whilst release notes are stored on the wiki. This is easy to forget, as I discovered! Change logs should be more concise than full blown release notes.</p>
+
+<p>Generate the packages with <code>cabal sdist</code> and test them all locally, then upload them to hackage. Don&#8217;t forget to upload the cloud-haskell meta-package too!</p>
+
+<h4 id='after_the_release'>After the release</h4>
+
+<p><strong>Now</strong> you should tag all the projects with the relevant version number. Since moving to individual git repositories, the tagging scheme is now <code>x.y.z</code> and <em>not</em> <code>&lt;project&gt;-x.y.z</code>.</p>
+
+<p>Once the release is out, you should go to <a href='https://cloud-haskell.atlassian.net'>JIRA</a> and close all the tickets for the release. Jira has a nice &#8216;bulk change&#8217; feature that makes this very easy.</p>
+
+<p>After that, it&#8217;s time to tweet about the release, post to the parallel-haskell mailing list, blog etc. Spread the word.</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+

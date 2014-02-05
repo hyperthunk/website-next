@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Contributor Guide</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h1 id='contributing'>Contributing</h1>
+
+<p>Community contributions are most welcome! These should be submitted via Github&#8217;s <em>pull request</em> mechanism. Following the guidelines described here will ensure that pull requests require a minimum of effort to deal with, hopefully allowing the maintainer who is merging your changes to focus on the substance of the patch rather than stylistic concerns and/or handling merge conflicts.</p>
+
+<p>This document is quite long, but don&#8217;t let that put you off! Most of the things we&#8217;re saying here are just common sense and none of them is hard to follow.</p>
+
+<p>With this in mind, please try to observe the following guidelines when submitting patches.</p>
+
+<h3 id='1_check_to_see_if_your_patch_is_likely_to_be_accepted'><strong>1. Check to see if your patch is likely to be accepted</strong></h3>
+
+<p>We have a rather full backlog, so your help will be most welcome assisting us in clearing that. You can view the exiting open issues on the <a href='https://cloud-haskell.atlassian.net/issues/?filter=10001'>jira issue tracker</a>.</p>
+
+<p>If you wish to submit an issue there, you can do so without logging in, although you obviously won&#8217;t get any email notifications unless you create an account and provide your email address.</p>
+
+<p>It is also important to work out which component or sub-system should be changed. You may wish to email the maintainers to discuss this first.</p>
+
+<h3 id='2_make_sure_your_patch_merges_cleanly'><strong>2. Make sure your patch merges cleanly</strong></h3>
+
+<p>Working through pull requests is time consuming and this project is entirely staffed by volunteers. Please make sure your pull requests merge cleanly whenever possible, so as to avoid wasting everyone&#8217;s time.</p>
+
+<p>The best way to achieve this is to fork the main repository on github, and then make your changes in a local branch. Before submitting your pull request, fetch and rebase any changes to the upstream source branch and merge these into your local branch. For example:</p>
+<div class='highlight'><pre><code class='bash'><span class='c'>## on your local repository, create a branch to work in</span>
+
+<span class='nv'>$ </span>git checkout -b bugfix-issue123
+
+<span class='c'>## make, add and commit your changes</span>
+
+<span class='nv'>$ </span>git checkout master
+<span class='nv'>$ </span>git remote add upstream git://github.com/haskell-distributed/distributed-process.git
+<span class='nv'>$ </span>git fetch upstream
+<span class='nv'>$ </span>git rebase upstream/master
+
+<span class='c'>## and now rebase (or merge) against your work</span>
+
+<span class='nv'>$ </span>git checkout bugfix-issue123
+<span class='nv'>$ </span>git merge master
+
+<span class='c'>## make sure you resolve any merge conflicts</span>
+<span class='c'>## and commit before sending a pull request!</span>
+</code></pre></div>
+<h3 id='3_follow_the_patch_submission_rules_of_thumb'><strong>3. Follow the patch submission <em>rules of thumb</em></strong></h3>
+
+<p>These are pretty simple and are mostly cribbed from the GHC wiki&#8217;s git working conventions page <a href='http://hackage.haskell.org/trac/ghc/wiki/WorkingConventions/Git'>here</a>.</p>
+
+<ol>
+<li>try to make small patches - the bigger they are, the longer the pull request QA process will take</li>
+
+<li>strictly separate all changes that affect functionality from those that just affect code layout, indentation, whitespace, filenames etc</li>
+
+<li>always include the issue number (of the form <code>fixes #N</code>) in the final commit message for the patch - pull requests without an issue are unlikely to have been discussed (see above)</li>
+
+<li>use Unix conventions for line endings. If you are on Windows, ensure that git handles line-endings sanely by running <code>git config --global core.autocrlf false</code></li>
+
+<li>make sure you have setup git to use the correct name and email for your commits - see the <a href='https://help.github.com/articles/setting-your-email-in-git'>github help guide</a></li>
+</ol>
+
+<h3 id='4_make_sure_all_the_tests_pass'><strong>4. Make sure all the tests pass</strong></h3>
+
+<p>If there are any failing tests then your pull request will not be merged. Please don&#8217;t rely on the maintainers to deal with these, unless of course the tests are failing already on the branch you&#8217;ve diverged from. In that case, please submit an issue so that we can fix the failing tests asap!</p>
+
+<h3 id='5_try_to_eliminate_compiler_warnings'><strong>5. Try to eliminate compiler warnings</strong></h3>
+
+<p>Code should be compilable with <code>-Wall -Werror</code>. There should be no warnings. We <em>may</em> make some exceptions to this rule, but pull requests that contain multitudinous compiler warnings will take longer to QA.</p>
+
+<h3 id='6_always_branch_from_the_right_place'><strong>6. Always branch from the right place</strong></h3>
+
+<p>Please be aware of whether or not your changes are actually a bugfix or a new feature, and branch from the right place accordingly. The general rule is:</p>
+
+<ul>
+<li>new features must branch off <code>development</code></li>
+
+<li>bug fixes must branch off <code>master</code> (which is the stable, production branch)</li>
+</ul>
+
+<p>If you branch from the wrong place then you will be asked to rework your changes so try to get this right in the first place. If you&#8217;re unsure whether a patch should be considered a feature or a bug-fix then discuss this when opening a new github issue.</p>
+
+<h3 id='general_style'>General Style</h3>
+
+<p>A lot of this <strong>is</strong> taken from the GHC Coding Style entry <a href='http://hackage.haskell.org/trac/ghc/wiki/Commentary/CodingStyle'>here</a>. In particular, please follow <strong>all</strong> the advice on that wiki page when it comes to including comments in your code.</p>
+
+<p>I am also grateful to @tibbe for his <a href='https://github.com/tibbe/haskell-style-guide'>haskell-style-guide</a>, from which some of these rules have been taken.</p>
+
+<p>As a general rule, stick to the same coding style as is already used in the file you&#8217;re editing. It <strong>is</strong> much better to write code that is transparent than to write code that is short. Please don&#8217;t assume everyone is a minimalist - self explanatory code is <strong>much</strong> better in the long term than pithy one-liners. Having said that, we <em>do</em> like reusing abstractions where doing so adds to the clarity of the code as well as minimising repetitious boilerplate.</p>
+
+<h3 id='formatting'>Formatting</h3>
+
+<h4 id='line_length'>Line Length</h4>
+
+<p>Maximum line length is <em>80 characters</em>. This might seem antiquated to you, but some of us do things like github pull-request code reviews on our mobile devices on the way to work, and long lines make this horrendously difficult. Besides which, some of us are also emacs users and have this rule set up for all of our source code editing modes.</p>
+
+<h4 id='indentation'>Indentation</h4>
+
+<p>Tabs are illegal. Use <strong>only</strong> spaces for indenting. Indentation is usually 2 spaces, with 4 spaces used in some places. We&#8217;re pretty chilled about this, but try to remain consistent.</p>
+
+<h4 id='blank_lines'>Blank Lines</h4>
+
+<p>One blank line between top-level definitions. No blank lines between type signatures and function definitions. Add one blank line between functions in a type class instance declaration if the functions bodies are large. As always, use your judgement.</p>
+
+<h4 id='whitespace'>Whitespace</h4>
+
+<p>Do not introduce trailing whitespace. If you find trailing whitespace, feel free to strip it out - in a separate commit of course!</p>
+
+<p>Surround binary operators with a single space on either side. Use your better judgement for the insertion of spaces around arithmetic operators but always be consistent about whitespace on either side of a binary operator.</p>
+
+<h4 id='alignment'>Alignment</h4>
+
+<p>When it comes to alignment, there&#8217;s probably a mix of things in the codebase right now. Personally, I tend not to align import statements as these change quite frequently and it is pain keeping the indentation consistent.</p>
+
+<p>The one exception to this is probably imports/exports, which we <em>are</em> a bit finicky about:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='k'>qualified</span> <span class='nn'>Foo.Bar.Baz</span> <span class='k'>as</span> <span class='n'>Bz</span>
+<span class='kr'>import</span> <span class='nn'>Data.Binary</span>
+  <span class='p'>(</span> <span class='kt'>Binary</span> <span class='p'>(</span><span class='o'>..</span><span class='p'>),</span>
+  <span class='p'>,</span> <span class='nf'>getWord8</span>
+  <span class='p'>,</span> <span class='nf'>putWord8</span>
+  <span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Data.Blah</span>
+<span class='kr'>import</span> <span class='nn'>Data.Boom</span> <span class='p'>(</span><span class='kt'>Typeable</span><span class='p'>)</span>
+</code></pre></div>
+<p>Personally I don&#8217;t care <em>that much</em> about alignment for other things, but as always, try to follow the convention in the file you&#8217;re editing and don&#8217;t change things just for the sake of it.</p>
+
+<h3 id='comments'>Comments</h3>
+
+<h4 id='punctuation'>Punctuation</h4>
+
+<p>Write proper sentences; start with a capital letter and use proper punctuation.</p>
+
+<h4 id='toplevel_definitions'>Top-Level Definitions</h4>
+
+<p>Comment every top level function (particularly exported functions), and provide a type signature; use Haddock syntax in the comments. Comment every exported data type. Function example:</p>
+<div class='highlight'><pre><code class='haskell'><span class='c1'>-- | Send a message on a socket.  The socket must be in a connected</span>
+<span class='c1'>-- state.  Returns the number of bytes sent.  Applications are</span>
+<span class='c1'>-- responsible for ensuring that all data has been sent.</span>
+<span class='nf'>send</span> <span class='ow'>::</span> <span class='kt'>Socket</span>      <span class='c1'>-- ^ Connected socket</span>
+     <span class='ow'>-&gt;</span> <span class='kt'>ByteString</span>  <span class='c1'>-- ^ Data to send</span>
+     <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>Int</span>      <span class='c1'>-- ^ Bytes sent</span>
+</code></pre></div>
+<p>For functions the documentation should give enough information to apply the function without looking at the function&#8217;s definition.</p>
+
+<h3 id='naming'>Naming</h3>
+
+<p>Use <code>mixedCase</code> when naming functions and <code>CamelCase</code> when naming data types.</p>
+
+<p>For readability reasons, don&#8217;t capitalize all letters when using an abbreviation. For example, write <code>HttpServer</code> instead of <code>HTTPServer</code>. Exception: Two letter abbreviations, e.g. <code>IO</code>.</p>
+
+<h4 id='modules'>Modules</h4>
+
+<p>Use singular when naming modules e.g. use <code>Data.Map</code> and <code>Data.ByteString.Internal</code> instead of <code>Data.Maps</code> and <code>Data.ByteString.Internals</code>.</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+

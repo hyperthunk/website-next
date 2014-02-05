@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Getting Started</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="#">Tutorial</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="#create_a_node"><i class="icon-chevron-right"></i> Create a node</a></li>
+              <li><a href="#send_messages"><i class="icon-chevron-right"></i> Send messages</a></li>
+              <li><a href="#spawning_remote_processes"><i class="icon-chevron-right"></i> Spawning Remote Processes</a></li>
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='getting_started_'>Getting Started <a href='http://hackage.haskell.org/platform' class='pull-right'><img src='http://hackage.haskell.org/platform/icons/button-64.png' /></a></h3>
+<hr />
+<p>Please note that this tutorial is a work in progress. We highly recommend reading the haddock documentation and reading the Well-Typed blog, which are offer the best quality sources of information at this time.</p>
+
+<p>In order to go through this tutorial you will need a Haskell development environment and we recommend installing the latest version of the <a href='http://www.haskell.org/platform/'>Haskell Platform</a> if you&#8217;ve not done so already.</p>
+
+<p>Once you&#8217;re up and running, you&#8217;ll want to get hold of the distributed-process library and a choice of network transport backend. This guide will use the network-transport-tcp backend, but the simplelocalnet or inmemory backends are also available on github, along with some other experimental options.</p>
+
+<h3 id='create_a_node'>Create a node</h3>
+
+<p>Cloud Haskell&#8217;s <em>lightweight processes</em> reside on a &#8216;node&#8217;, which must be initialised with a network transport implementation and a remote table. The latter is required so that physically separate nodes can identify known objects in the system (such as types and functions) when receiving messages from other nodes. We&#8217;ll look at inter-node communication later, so for now it will suffice to pass the default remote table, which defines the built-in stuff Cloud Haskell needs at a minimum.</p>
+
+<p>Let&#8217;s start with imports first:</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='nn'>Network.Transport.TCP</span> <span class='p'>(</span><span class='nf'>createTransport</span><span class='p'>,</span> <span class='nf'>defaultTCPParameters</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Control.Distributed.Process</span>
+<span class='kr'>import</span> <span class='nn'>Control.Distributed.Process.Node</span>
+</code></pre></div>
+<p>Our TCP network transport backend needs an IP address and port to get started with, and we&#8217;re good to go&#8230;</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='kt'>Right</span> <span class='n'>t</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='s'>&quot;127.0.0.1&quot;</span> <span class='s'>&quot;10501&quot;</span> <span class='n'>defaultTCPParameters</span>
+  <span class='n'>node</span> <span class='ow'>&lt;-</span> <span class='n'>newLocalNode</span> <span class='n'>t</span> <span class='n'>initRemoteTable</span>
+  <span class='o'>....</span>
+</code></pre></div>
+<p>And now we have a running node.</p>
+
+<h3 id='send_messages'>Send messages</h3>
+
+<p>We can start a new lightweight process with <code>forkProcess</code>, which takes a node, a <code>Process</code> action - because our concurrent code will run in the <code>Process</code> monad - and returns an address for the process in the form of a <code>ProcessId</code>. The process id can be used to send messages to the running process - here we will send one to ourselves!</p>
+<div class='highlight'><pre><code class='haskell'><span class='c1'>-- in main</span>
+  <span class='kr'>_</span> <span class='ow'>&lt;-</span> <span class='n'>forkProcess</span> <span class='n'>node</span> <span class='o'>$</span> <span class='kr'>do</span>
+    <span class='c1'>-- get our own process id</span>
+    <span class='n'>self</span> <span class='ow'>&lt;-</span> <span class='n'>getSelfPid</span>
+    <span class='n'>send</span> <span class='n'>self</span> <span class='s'>&quot;hello&quot;</span>
+    <span class='n'>hello</span> <span class='ow'>&lt;-</span> <span class='n'>expect</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='kt'>String</span>
+    <span class='n'>liftIO</span> <span class='o'>$</span> <span class='n'>putStrLn</span> <span class='n'>hello</span>
+  <span class='n'>return</span> <span class='nb'>()</span>
+</code></pre></div>
+<p>Lightweight processes are implemented as <code>forkIO</code> threads. In general we will try to forget about this implementation detail, but for now just note that we haven&#8217;t deadlocked ourself by sending to and receiving from our own mailbox in this fashion. Sending a message is a completely asynchronous operation - even if the recipient doesn&#8217;t exist, no error will be raised and evaluating <code>send</code> will not block the caller.</p>
+
+<p>Receiving messages works the other way around, blocking the caller until a message matching the expected type arrives in the process (conceptual) mailbox. If multiple messages of that type are in the queue, they will be returned in FIFO order, otherwise the caller will be blocked until a message arrives that can be decoded to the correct type.</p>
+
+<p>Let&#8217;s spawn another process on the same node and make the two talk to each other.</p>
+<div class='highlight'><pre><code class='haskell'><span class='kr'>import</span> <span class='nn'>Control.Concurrent</span> <span class='p'>(</span><span class='nf'>threadDelay</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Control.Monad</span> <span class='p'>(</span><span class='nf'>forever</span><span class='p'>)</span>
+<span class='kr'>import</span> <span class='nn'>Control.Distributed.Process</span>
+<span class='kr'>import</span> <span class='nn'>Control.Distributed.Process.Node</span>
+<span class='kr'>import</span> <span class='nn'>Network.Transport.TCP</span> <span class='p'>(</span><span class='nf'>createTransport</span><span class='p'>,</span> <span class='nf'>defaultTCPParameters</span><span class='p'>)</span>
+
+<span class='nf'>replyBack</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>ProcessId</span><span class='p'>,</span> <span class='kt'>String</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='nb'>()</span>
+<span class='nf'>replyBack</span> <span class='p'>(</span><span class='n'>sender</span><span class='p'>,</span> <span class='n'>msg</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>send</span> <span class='n'>sender</span> <span class='n'>msg</span>
+
+<span class='nf'>logMessage</span> <span class='ow'>::</span> <span class='kt'>String</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='nb'>()</span>
+<span class='nf'>logMessage</span> <span class='n'>msg</span> <span class='ow'>=</span> <span class='n'>say</span> <span class='o'>$</span> <span class='s'>&quot;handling &quot;</span> <span class='o'>++</span> <span class='n'>msg</span>
+
+<span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='kt'>Right</span> <span class='n'>t</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='s'>&quot;127.0.0.1&quot;</span> <span class='s'>&quot;10501&quot;</span> <span class='n'>defaultTCPParameters</span>
+  <span class='n'>node</span> <span class='ow'>&lt;-</span> <span class='n'>newLocalNode</span> <span class='n'>t</span> <span class='n'>initRemoteTable</span>
+  <span class='c1'>-- Spawn a new process on a local node </span>
+  <span class='n'>forkProcess</span> <span class='n'>node</span> <span class='o'>$</span> <span class='kr'>do</span>
+    <span class='c1'>-- Spawn worker inside one more process on the local node </span>
+    <span class='n'>echoPid</span> <span class='ow'>&lt;-</span> <span class='n'>spawnLocal</span> <span class='o'>$</span> <span class='n'>forever</span> <span class='o'>$</span> <span class='kr'>do</span>
+      <span class='c1'>-- Test the matches in order against each message in the queue</span>
+      <span class='n'>receiveWait</span> <span class='p'>[</span><span class='n'>match</span> <span class='n'>logMessage</span><span class='p'>,</span> <span class='n'>match</span> <span class='n'>replyBack</span><span class='p'>]</span>
+
+    <span class='c1'>-- `say` sends a message to the process registered as logger.</span>
+    <span class='c1'>-- By default, this process simply sends the string to stderr.</span>
+    <span class='n'>say</span> <span class='s'>&quot;send some messages!&quot;</span>
+    <span class='n'>send</span> <span class='n'>echoPid</span> <span class='s'>&quot;hello&quot;</span>
+    <span class='n'>self</span> <span class='ow'>&lt;-</span> <span class='n'>getSelfPid</span>
+    <span class='n'>send</span> <span class='n'>echoPid</span> <span class='p'>(</span><span class='n'>self</span><span class='p'>,</span> <span class='s'>&quot;hello&quot;</span><span class='p'>)</span>
+    <span class='c1'>-- like `expect` (waits for a message), but with timeout</span>
+    <span class='n'>m</span> <span class='ow'>&lt;-</span> <span class='n'>expectTimeout</span> <span class='mi'>1000000</span>
+    <span class='kr'>case</span> <span class='n'>m</span> <span class='kr'>of</span>
+      <span class='c1'>-- Die immediately - throws a ProcessExitException with the given reason.</span>
+      <span class='kt'>Nothing</span>  <span class='ow'>-&gt;</span> <span class='n'>die</span> <span class='s'>&quot;nothing came back!&quot;</span>
+      <span class='p'>(</span><span class='kt'>Just</span> <span class='n'>s</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>say</span> <span class='o'>$</span> <span class='s'>&quot;got back &quot;</span> <span class='o'>++</span> <span class='n'>s</span>
+    <span class='n'>return</span> <span class='nb'>()</span>
+
+  <span class='c1'>-- A 1 second wait. Otherwise the main thread can terminate before</span>
+  <span class='c1'>-- our messages reach the logging process or get flushed to stdio</span>
+  <span class='n'>liftIO</span> <span class='o'>$</span> <span class='n'>threadDelay</span> <span class='p'>(</span><span class='mi'>1</span><span class='o'>*</span><span class='mi'>1000000</span><span class='p'>)</span>
+  <span class='n'>return</span> <span class='nb'>()</span>
+</code></pre></div>
+<p>Note that we&#8217;ve used a <code>receive</code> class of function this time around. These functions work with the <a href='http://hackage.haskell.org/packages/archive/distributed-process/latest/doc/html/Control-Distributed-Process-Internal-Primitives.html#t:Match'><code>Match</code></a> data type, and provide a range of advanced dispatching options. The <code>match</code> construct allows you to construct a list of potential message handlers and have them evaluated against incoming messages. Our first match indicates that, given a tuple <code>t :: (ProcessId,
+String)</code> we will send the <code>String</code> component back to the sender&#8217;s <code>ProcessId</code>. Our second match prints out whatever string it receives.</p>
+
+<p>Also note the use of a &#8216;timeout&#8217; (given in microseconds), which is available for both the <code>expect</code> and <code>receive</code> variants. This returns <code>Nothing</code> unless a message can be dequeued from the mailbox within the specified time interval.</p>
+
+<h3 id='serializable'>Serializable</h3>
+
+<p>Processes can send data if the type implements the <code>Serializable</code> typeclass, which is done indirectly by implementing <code>Binary</code> and deriving <code>Typeable</code>. Implementations are already provided for primitives and some commonly used data structures.</p>
+
+<h3 id='spawning_remote_processes'>Spawning Remote Processes</h3>
+
+<p>In order to spawn a process on a node we need something of type <code>Closure (Process ())</code>. In distributed-process if <code>f : T1 -&gt; T2</code> then</p>
+<div class='highlight'><pre><code class='haskell'>  <span class='o'>$</span><span class='p'>(</span><span class='n'>mkClosure</span> <span class='n'>&#39;f</span><span class='p'>)</span> <span class='ow'>::</span> <span class='kt'>T1</span> <span class='ow'>-&gt;</span> <span class='kt'>Closure</span> <span class='kt'>T2</span>
+</code></pre></div>
+<p>That is, the first argument the function we pass to mkClosure will act as the closure environment for that process; if you want multiple values in the closure environment, you must tuple them up.</p>
+
+<p>In order to spawn a process remotely we will need to configure the remote table (see the documentation for more details) and the easiest way to do this, is to let the library generate the relevant code for us. For example (taken from the distributed-process-platform test suites):</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>sampleTask</span> <span class='ow'>::</span> <span class='p'>(</span><span class='kt'>TimeInterval</span><span class='p'>,</span> <span class='kt'>String</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='kt'>String</span>
+<span class='nf'>sampleTask</span> <span class='p'>(</span><span class='n'>t</span><span class='p'>,</span> <span class='n'>s</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>sleep</span> <span class='n'>t</span> <span class='o'>&gt;&gt;</span> <span class='n'>return</span> <span class='n'>s</span>
+
+<span class='o'>$</span><span class='p'>(</span><span class='n'>remotable</span> <span class='p'>[</span><span class='n'>&#39;sampleTask</span><span class='p'>])</span>
+</code></pre></div>
+<p>We can now create a closure environment for <code>sampleTask</code> like so:</p>
+<div class='highlight'><pre><code class='haskell'><span class='p'>(</span><span class='o'>$</span><span class='p'>(</span><span class='n'>mkClosure</span> <span class='n'>&#39;sampleTask</span><span class='p'>)</span> <span class='p'>(</span><span class='n'>seconds</span> <span class='mi'>2</span><span class='p'>,</span> <span class='s'>&quot;foobar&quot;</span><span class='p'>))</span>
+</code></pre></div>
+<p>The call to <code>remotable</code> generates a remote table and generates a definition <code>__remoteTable :: RemoteTable -&gt; RemoteTable</code> in our module for us. We can compose this with other remote tables in order to come up with a final, merged remote table for use in our program:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>myRemoteTable</span> <span class='ow'>::</span> <span class='kt'>RemoteTable</span>
+<span class='nf'>myRemoteTable</span> <span class='ow'>=</span> <span class='kt'>Main</span><span class='o'>.</span><span class='n'>__remoteTable</span> <span class='n'>initRemoteTable</span>
+
+<span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+ <span class='n'>localNode</span> <span class='ow'>&lt;-</span> <span class='n'>newLocalNode</span> <span class='n'>transport</span> <span class='n'>myRemoteTable</span>
+ <span class='c1'>-- etc</span>
+</code></pre></div><hr />
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+

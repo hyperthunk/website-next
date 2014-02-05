@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
         <meta charset="utf-8">
-    <title>About</title>
+    <title>Applications and other protocols</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Tim Watson"> 
@@ -32,12 +32,12 @@
 -->
 
     <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
     </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
   </head>
-  <body>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
         <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -128,26 +128,110 @@
     </div>
 
     <div class="container">
-  <ul class="breadcrumb">
-    <li><a href="/">Home</a> <span class="divider">/</span></li>
-    <li class="active">About</li>
-  </ul>
-</div>
-<div class="container">
-  Cloud Haskell is cool
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/wiki.html">Wiki</a> <span class="divider">/</span></li>
+      </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="/wiki.html"><i class="icon-chevron-right"></i> Wiki Home</a></li>
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+              
+                  
+                  <li><a href="/wiki/contributing.html">Contributor Guide</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/faq.html">FAQ/Getting Help</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/maintainers.html">Maintainers</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/networktransport.html">Network.Transport</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newdesign.html">New Backend and Transport Design</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/newtransports.html">Building new Transports</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/otherprotocols.html">Applications and other protocols</a></li>
+                  
+              
+                  
+                  <li><a href="/wiki/reliability.html">Fault Tolerance</a></li>
+                  
+              
+                  
+              
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='applications'>Applications</h3>
 
-<div class="hero-unit">
-  <h1>Install Cloud Haskell</h1>
-  <p>You can retrieve the latest version of Cloud Haskell from github.</p>
-  <p>
-    <a class="btn btn-primary" href="http://github.com/haskell-distributed">
-      View on Github
-    </a>
-  </p>
-</div>
+<p>If you are using <code>Network.Transport</code> in your application, or if you are writing (or interested in writing) <code>Network.Transport</code> support for another protocol, please add a brief description to this page so that we can coordinate the efforts.</p>
 
-</div> <!-- /container -->
+<h3 id='hdph'>HdpH</h3>
 
+<p><strong>H</strong>askell <strong>D</strong>istributed <strong>P</strong>arallel <strong>H</strong>askell is a shallowly embedded parallel extension of Haskell that supports high-level semi-explicit parallelism. HdpH has a distributed memory model, that manages computations on more than one multicore node. In addition <em>high-level semi-explicit parallelism</em> is supported by providing <code>spark</code> for implicit task placement, alleviating the job of dynamic load management to HdpH. Explicit task placement is supported with the <code>pushTo</code> primitive. Lastly, HdpH supports the node &lt;-&gt; node transfer of polymorphic closures. This enables the definition of both evaluation strategies and algorithmic skeletons by using a small set of polymorphic coordination primitives.</p>
+
+<p>The communication layer in HdpH adopts the <code>Network.Transport.TCP</code> realization of the network-transport API. The HdpH implementation is on hackage and is open source on GitHub.</p>
+
+<ul>
+<li>IFL2011 paper: <a href='http://www.macs.hw.ac.uk/~pm175/papers/Maier_Trinder_IFL2011_XT.pdf'>Implementing a High-level Distributed-Memory Parallel Haskell in Haskell</a></li>
+
+<li>SAC2013 paper: <a href='http://www.macs.hw.ac.uk/~rs46/papers/sac2013/Maier_Stewart_Trinder_SAC2013.pdf'>Reliable Scalable Symbolic Computation: The Design of SymGridPar2</a></li>
+
+<li>Hackage: <a href='http://hackage.haskell.org/package/hdph'>http://hackage.haskell.org/package/hdph</a></li>
+
+<li>Source code <a href='https://github.com/PatrickMaier/HdpH'>https://github.com/PatrickMaier/HdpH</a></li>
+</ul>
+
+<h1 id='protocol_implementations'>Protocol Implementations</h1>
+
+<h2 id='cci'>CCI</h2>
+
+<p>The <a href='http://cci-forum.com'>CCI</a> project is an open-source communication interface that aims to provide a simple and portable API, high performance, scalability for the largest deployments, and robustness in the presence of faults. It is developed and maintained by a partnership of research, academic, and industry members.</p>
+
+<p><a href='http://www.parsci.com'>Parallel Scientific</a> is contributing with CCI development and promoting its adoption as a portable API. We have developed <a href='https://www.assembla.com/code/cci-haskell/git/nodes'>Haskell bindings</a> for the CCI alpha implementation, and are keen to have a CCI backend for Cloud Haskell as resources allow.</p>
+        </div>
+      </div>
+    </div>
         <footer class="footer">
       <div class="container">
         <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>

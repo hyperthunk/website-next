@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <title>Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Tim Watson"> 
+    <!-- Le styles -->
+    <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS feed for this page">
+    <link rel="alternate" type="application/atom+xml" href="/rss.xml" title="Atom feed for this page"/>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/css/pygments.css" rel="stylesheet">
+    <link href="/css/nav.css" rel="stylesheet">
+    <link href="/css/page.css" rel="stylesheet">
+    <link href="/css/footer.css" rel="stylesheet">
+    <link href="/css/social.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+<!--
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+    <style>
+      body { padding-top: 0px; }
+     .navbar-fixed-top { position: relative !important; }
+    </style>
+    <link href="/css/sidenav.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".sidebar"> <!-- data-offset-top="10">-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Cloud Haskell</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li ><a href="/">Home</a></li>
+              <li class="active"><a href="/documentation.html">Documentation</a></li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown">Tutorials <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial1.html">Getting Started</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial2.html">Programming with Network.Transport</a></li>
+                          
+                      
+                          
+                          <li><a href="/tutorials/tutorial3.html">Managed Process Tutorial</a></li>
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                          
+                      
+                  </ul>
+              </li>
+              <!-- <li ><a href="/faq.html">FAQ</a></li> -->
+              <li ><a href="/contact.html">Contact</a></li>
+              <li class="dropdown">
+                <a href="http://www.haskell.org/haskellwiki/Cloud_Haskell" class="dropdown-toggle" data-toggle="dropdown">
+                   Resources
+                   <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                   <li><a href="/wiki.html">Wiki</a></li>
+                   <li><a href="http://www.haskell.org/haskellwiki/Cloud_Haskell">CH on haskell.org</a></li>
+                   <li><a href="https://github.com/haskell-distributed">Github Repositories</a></li>
+                   <li><a href="https://cloud-haskell.atlassian.net/secure/BrowseProjects.jspa#all">Issue Tracker</a></li>
+                   <li><a href="/static/semantics.pdf">Formal Semantics</a></li>
+                   <li><a href="http://www.well-typed.com/blog/">Well-Typed Blog</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+        <ul class="breadcrumb">
+          <li><a href="/">Home</a> <span class="divider">/</span></li>
+          <li><a href="#">Documentation</a> <span class="divider">/</span></li>
+        </ul>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="span3 sidebar">
+          <div data-spy="affix" data-offset-bottom="290">
+            <ul class="nav nav-list sidenav">
+              <li><a href="#cloud_haskell_platform"><i class="icon-chevron-right"></i> Cloud Haskell Platform</a></li>
+              <li><a href="#network_transport_abstraction_layer"><i class="icon-chevron-right"></i> Network Abstraction Layer</a></li>
+              <li><a href="#concurrency_and_distribution"><i class="icon-chevron-right"></i> Concurrency and Distribution</a></li>
+              <li><a href="#what_is_serializable"><i class="icon-chevron-right"></i> What is Serializable</a></li>
+              <li><a href="#typed_channels"><i class="icon-chevron-right"></i> Typed Channels</a></li>
+              <li><a href="#rethinking_the_task_layer"><i class="icon-chevron-right"></i> Rethinking the Task Layer</a></li>
+           </ul>
+          </div>
+        </div>
+        <div class="span9">
+          <h3 id='cloud_haskell_platform'>Cloud Haskell Platform</h3>
+
+<p>This is the <a href='http://www.haskell.org/haskellwiki/Cloud_Haskell'><em>Cloud Haskell Platform</em></a>. Cloud Haskell is a set of libraries that bring Erlang-style concurrency and distribution to Haskell programs. This project is an implementation of that distributed computing interface, where processes communicate with one another through explicit message passing rather than shared memory.</p>
+
+<p>Originally described by the joint <a href='http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf'>Towards Haskell in the Cloud</a> paper, Cloud Haskell has be re-written from the ground up and supports a rich and growing number of features for</p>
+
+<ul>
+<li>building concurrent applications using asynchronous message passing</li>
+
+<li>building distributed computing applications</li>
+
+<li>building fault tolerant systems</li>
+
+<li>running Cloud Haskell nodes on various network transports</li>
+
+<li>working with several network transport implementations (and more in the pipeline)</li>
+
+<li>supporting <em>static</em> values (required for remote communication)</li>
+</ul>
+
+<p>There is a recent <a href='http://sneezy.cs.nott.ac.uk/fun/2012-02/coutts-2012-02-28.pdf'>presentation</a> on Cloud Haskell and this reimplementation, which is worth reading in conjunction with the documentation and wiki pages on this website..</p>
+
+<p>Cloud Haskell comprises the following components, some of which are complete, others experimental.</p>
+
+<ul>
+<li><a href='https://github.com/haskell-distributed/distributed-process'>distributed-process</a>: Base concurrency and distribution support</li>
+
+<li><a href='https://github.com/haskell-distributed/distributed-process-platform'>distributed-process-platform</a>: The Cloud Haskell Platform - APIs</li>
+
+<li><a href='http://hackage.haskell.org/package/distributed-static'>distributed-static</a>: Support for static values</li>
+
+<li><a href='http://hackage.haskell.org/package/rank1dynamic'>rank1dynamic</a>: Like <code>Data.Dynamic</code> and <code>Data.Typeable</code> but supporting polymorphic values</li>
+
+<li><a href='http://hackage.haskell.org/package/network-transport'>network-transport</a>: Generic <code>Network.Transport</code> API</li>
+
+<li><a href='http://hackage.haskell.org/package/network-transport-tcp'>network-transport-tcp</a>: TCP realisation of <code>Network.Transport</code></li>
+
+<li><a href='https://github.com/haskell-distributed/network-transport-inmemory'>network-transport-inmemory</a>: In-memory realisation of <code>Network.Transport</code> (incomplete)</li>
+
+<li><a href='https://github.com/haskell-distributed/network-transport-composed'>network-transport-composed</a>: Compose two transports (very preliminary)</li>
+
+<li><a href='http://hackage.haskell.org/package/distributed-process-simplelocalnet'>distributed-process-simplelocalnet</a>: Simple backend for local networks</li>
+
+<li><a href='http://hackage.haskell.org/package/distributed-process-azure'>distributed-process-azure</a>: Azure backend for Cloud Haskell (proof of concept)</li>
+</ul>
+
+<p>One of Cloud Haskell&#8217;s goals is to separate the transport layer from the <em>process layer</em>, so that the transport backend is entirely independent: it is envisaged that this interface might later be used by models other than the Cloud Haskell paradigm, and that applications built using Cloud Haskell might be easily configured to work with different backend transports.</p>
+
+<p>Abstracting over the transport layer allows different protocols for message passing, including TCP/IP, UDP, <a href='http://en.wikipedia.org/wiki/Message_Passing_Interface'>MPI</a>, <a href='http://www.olcf.ornl.gov/center-projects/common-communication-interface/'>CCI</a>, ZeroMQ, SSH, MVars, Unix pipes, and more. Each of these transports would provide its own implementation of the <code>Network.Transport</code> and provide a means of creating new connections for use within <code>Control.Distributed.Process</code>. This separation means that transports might be used for other purposes than Cloud Haskell.</p>
+
+<p>The following diagram shows dependencies between the various subsystems, in an application using Cloud Haskell, where arrows represent explicit directional dependencies.</p>
+<hr />
+<pre><code>+------------------------------------------------------------+
+|                        Application                         |
++------------------------------------------------------------+
+             |                               |
+             V                               V
++-------------------------+   +------------------------------+
+|      Cloud Haskell      |&lt;--|    Cloud Haskell Backend     |
+|  (distributed-process)  |   | (distributed-process-...)    |
++-------------------------+   +------------------------------+
+             |           ______/             |
+             V           V                   V
++-------------------------+   +------------------------------+
+|   Transport Interface   |&lt;--|   Transport Implementation   |
+|   (network-transport)   |   |   (network-transport-...)    |
++-------------------------+   +------------------------------+
+                                             |
+                                             V
+                              +------------------------------+
+                              | Haskell/C Transport Library  |
+                              +------------------------------+</code></pre>
+<hr />
+<p>In this diagram, the various nodes roughly correspond to specific modules:</p>
+
+<pre><code>Cloud Haskell                : Control.Distributed.Process
+Cloud Haskell                : Control.Distributed.Process.*
+Transport Interface          : Network.Transport
+Transport Implementation     : Network.Transport.*</code></pre>
+
+<p>An application is built using the primitives provided by the Cloud Haskell layer, provided by <code>Control.Distributed.Process</code> module, which provides abstractions such as nodes and processes.</p>
+
+<p>The application also depends on a Cloud Haskell Backend, which provides functions to allow the initialisation of the transport layer using whatever topology might be appropriate to the application.</p>
+
+<p>It is, of course, possible to create new Cloud Haskell nodes by using a Network Transport Backend such as <code>Network.Transport.TCP</code> directly.</p>
+
+<p>The Cloud Haskell interface and backend, make use of the Transport interface provided by the <code>Network.Transport</code> module. This also serves as an interface for the <code>Network.Transport.*</code> module, which provides a specific implementation for this transport, and may, for example, be based on some external library written in Haskell or C.</p>
+
+<h3 id='network_transport_abstraction_layer'>Network Transport Abstraction Layer</h3>
+
+<p>Cloud Haskell&#8217;s generic <a href='http://hackage.haskell.org/package/network-transport'>network-transport</a> API is entirely independent of the concurrency and messaging passing capabilities of the <em>process layer</em>. Cloud Haskell applications are built using the primitives provided by the <em>process layer</em> (i.e., <a href='https://github.com/haskell-distributed/distributed-process'>distributed-process</a>), which provides abstractions such as nodes and processes. Applications must also depend on a Cloud Haskell Backend, which provides functions to allow the initialisation of the transport layer using whatever topology might be appropriate to the application.</p>
+
+<p><code>Network.Transport</code> is a network abstraction layer geared towards specific classes of applications, offering the following high level concepts:</p>
+
+<ul>
+<li>Nodes in the network are represented by <code>EndPoint</code>s. These are heavyweight stateful objects.</li>
+
+<li>Each <code>EndPoint</code> has an <code>EndPointAddress</code>.</li>
+
+<li>Connections can be established from one <code>EndPoint</code> to another using the <code>EndPointAddress</code> of the remote end.</li>
+
+<li>The <code>EndPointAddress</code> can be serialised and sent over the network, where as <code>EndPoint</code>s and connections cannot.</li>
+
+<li>Connections between <code>EndPoint</code>s are unidirectional and lightweight.</li>
+
+<li>Outgoing messages are sent via a <code>Connection</code> object that represents the sending end of the connection.</li>
+
+<li>Incoming messages for <strong>all</strong> of the incoming connections on an <code>EndPoint</code> are collected via a shared receive queue.</li>
+
+<li>In addition to incoming messages, <code>EndPoint</code>s are notified of other <code>Event</code>s such as new connections or broken connections.</li>
+</ul>
+
+<p>This design was heavily influenced by the design of the Common Communication Interface (<a href='http://www.olcf.ornl.gov/center-projects/common-communication-interface/'>CCI</a>). Important design goals are:</p>
+
+<ul>
+<li>Connections should be lightweight: it should be no problem to create thousands of connections between endpoints.</li>
+
+<li>Error handling is explicit: every function declares as part of its type which errors it can return (no exceptions are thrown)</li>
+
+<li>Error handling is &#8220;abstract&#8221;: errors that originate from implementation specific problems (such as &#8220;no more sockets&#8221; in the TCP implementation) get mapped to generic errors (&#8220;insufficient resources&#8221;) at the Transport level.</li>
+</ul>
+
+<p>For the purposes of most Cloud Haskell applications, it is sufficient to know enough about the <code>Network.Transport</code> API to instantiate a backend with the required configuration and pass the returned opaque handle to the <code>Node</code> API in order to establish a new, connected, running node. More involved setups are, of course, possible; The simplest use of the API is thus</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>main</span> <span class='ow'>::</span> <span class='kt'>IO</span>
+<span class='nf'>main</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='kt'>Right</span> <span class='n'>transport</span> <span class='ow'>&lt;-</span> <span class='n'>createTransport</span> <span class='s'>&quot;127.0.0.1&quot;</span> <span class='s'>&quot;10080&quot;</span> <span class='n'>defaultTCPParameters</span>
+  <span class='n'>node1</span> <span class='ow'>&lt;-</span> <span class='n'>newLocalNode</span> <span class='n'>transport</span> <span class='n'>initRemoteTable</span>
+</code></pre></div>
+<p>Here we can see that the application depends explicitly on the <code>defaultTCPParameters</code> and <code>createTransport</code> functions from <code>Network.Transport.TCP</code>, but little else. The application <em>can</em> make use of other <code>Network.Transport</code> APIs if required, but for the most part this is irrelevant and the application will interact with Cloud Haskell through the <em>Process Layer</em> and <em>Platform</em>.</p>
+
+<p>For more details about <code>Network.Transport</code> please see the <a href='/wiki/networktransport.html'>wiki page</a>.</p>
+
+<h3 id='concurrency_and_distribution'>Concurrency and Distribution</h3>
+
+<p>The <em>Process Layer</em> is where Cloud Haskell&#8217;s support for concurrency and distributed programming are exposed to application developers. This layer deals explicitly with</p>
+
+<p>The core of Cloud Haskell&#8217;s concurrency and distribution support resides in the <a href='https://github.com/haskell-distributed/distributed-process'>distributed-process</a> library. As well as the APIs necessary for starting nodes and forking processes on them, we find all the basic primitives required to</p>
+
+<ul>
+<li>spawn processes locally and remotely</li>
+
+<li>send and receive messages, optionally using typed channels</li>
+
+<li>monitor and/or link to processes, channels and other nodes</li>
+</ul>
+
+<p>Most of this is easy enough to follow in the haddock documentation and the various tutorials. Here we focus on the essential <em>concepts</em> behind the process layer.</p>
+
+<p>A concurrent process is somewhat like a Haskell thread - in fact it is a <code>forkIO</code> thread - but one that can send and receive messages through its <em>process mailbox</em>. Each process can send messages asynchronously to other processes, and can receive messages synchronously from its own mailbox. The conceptual difference between threads and processes is that the latter do not share state, but communicate only via message passing.</p>
+
+<p>Code that is executed in this manner must run in the <code>Process</code> monad. Our process will look like any other monad code, plus we provide and instance of <code>MonadIO</code> for <code>Process</code>, so you can <code>liftIO</code> to make IO actions available.</p>
+
+<p>Processes reside on nodes, which in our implementation map directly to the <code>Control.Distributed.Processes.Node</code> module. Given a configured <code>Network.Transport</code> backend, starting a new node is fairly simple:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>newLocalNode</span> <span class='ow'>::</span> <span class='kt'>Transport</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>LocalNode</span>
+</code></pre></div>
+<p>Once this function returns, the node will be <em>up and running</em> and able to interact with other nodes and host processes. It is possible to start more than one node in the same running program, though if you do this they will continue to send messages to one another using the supplied <code>Network.Transport</code> backend.</p>
+
+<p>Given a new node, there are two primitives for starting a new process.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>forkProcess</span> <span class='ow'>::</span> <span class='kt'>LocalNode</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='nb'>()</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='kt'>ProcessId</span>
+<span class='nf'>runProcess</span>  <span class='ow'>::</span> <span class='kt'>LocalNode</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='nb'>()</span> <span class='ow'>-&gt;</span> <span class='kt'>IO</span> <span class='nb'>()</span>
+</code></pre></div>
+<p>Once we&#8217;ve spawned some processes, they can communicate with one another using the messaging primitives provided by <a href='https://github.com/haskell-distributed/distributed-process'>distributed-processes</a>, which are well documented in the haddocks.</p>
+
+<h3 id='what_is_serializable'>What is Serializable</h3>
+
+<p>Processes can send data if the type implements the <code>Serializable</code> typeclass, which is done indirectly by implementing <code>Binary</code> and deriving <code>Typeable</code>. Implementations are already provided for primitives and some commonly used data structures. As programmers, we see the messages in nice high-level form (e.g., <code>Int</code>, <code>String</code>, <code>Ping</code>, <code>Pong</code>, etc), however these data have to be encoded in order to be sent over a communications channel.</p>
+
+<p>Not all types are <code>Serializable</code>, for example concurrency primitives such as <code>MVar</code> and <code>TVar</code> are meaningless outside the context of threads with a shared memory. Cloud Haskell programs remain free to use these constructs within processes or within processes on the same machine though. If you want to pass data between processes using <em>ordinary</em> concurrency primitives such as <code>STM</code> then you&#8217;re free to do so. Processes spawned locally can share types such as <code>TMVar</code> just as normal Haskell threads would.</p>
+
+<h3 id='typed_channels'>Typed Channels</h3>
+
+<p>Channels provides an alternative to message transmission with <code>send</code> and <code>expect</code>. While <code>send</code> and <code>expect</code> allow transmission of messages of any <code>Serializable</code> type, channels require a uniform type. Channels work like a distributed equivalent of Haskell&#8217;s <code>Control.Concurrent.Chan</code>, however they have distinct ends: a single receiving port and a corollary send port.</p>
+
+<p>Channels provide a nice alternative to <em>bare send and receive</em>, which is a bit <em>unHaskellish</em>, because the processes message queue has messages of multiple types, and we have to do dynamic type checking.</p>
+
+<p>We create channels with a call to <code>newChan</code>, and send/receive on them using the <code>{send,receive}Chan</code> primitives:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>channelsDemo</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='nb'>()</span>
+<span class='nf'>channelsDemo</span> <span class='ow'>=</span> <span class='kr'>do</span>
+    <span class='p'>(</span><span class='n'>sp</span><span class='p'>,</span> <span class='n'>rp</span><span class='p'>)</span> <span class='ow'>&lt;-</span> <span class='n'>newChan</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>SendPort</span> <span class='kt'>String</span><span class='p'>,</span> <span class='kt'>ReceivePort</span> <span class='kt'>String</span><span class='p'>)</span>
+    
+    <span class='c1'>-- send on a channel</span>
+    <span class='n'>spawnLocal</span> <span class='o'>$</span> <span class='n'>sendChan</span> <span class='n'>sp</span> <span class='s'>&quot;hello!&quot;</span>
+    
+    <span class='c1'>-- receive on a channel</span>
+    <span class='n'>m</span> <span class='ow'>&lt;-</span> <span class='n'>receiveChan</span> <span class='n'>rp</span>
+    <span class='n'>say</span> <span class='o'>$</span> <span class='n'>show</span> <span class='n'>m</span>
+</code></pre></div>
+<p>Channels are particularly useful when you are sending a message that needs a response, because the code that receives the response knows exactly where it came from - i.e., it knows that it came from the <code>SendPort</code> connected to the <code>ReceivePort</code> on which it just received a response.</p>
+
+<p>Channels can sometimes allows message types to be simplified, as passing a <code>ProcessId</code> to reply to isn&#8217;t required. Channels are not so useful when you need to spawn a process and then send a bunch a messages to it and wait for replies, because we can’t send the <code>ReceivePort</code>.</p>
+
+<p>ReceivePorts can be merged, so you can listen on several simultaneously. In the latest version of <a href='https://github.com/haskell-distributed/distributed-process'>distributed-process</a>, you can listen for <em>regular</em> messages and on multiple channels at the same time, using <code>matchChan</code> in the list of allowed matches passed <code>receive</code>.</p>
+
+<h3 id='linking_and_monitoring'>Linking and monitoring</h3>
+
+<p>Processes can be linked to other processes, nodes or channels. Links are unidirectional, and guarantee that once the linked object <em>dies</em>, the linked process will also be terminated. Monitors do not cause the <em>listening</em> process to exit, but rather they put a <code>ProcessMonitorNotification</code> into the process&#8217; mailbox. Linking and monitoring are foundational tools for <em>supervising</em> processes, where a top level process manages a set of children, starting, stopping and restarting them as necessary.</p>
+
+<h3 id='stopping_processes'>Stopping Processes</h3>
+
+<p>Some processes, like the <em>outer</em> process in the previous example, will run until they&#8217;ve completed and then return their value. This is just as we find with IO action, and there is an instance of <code>MonadIO</code> for the <code>Process</code> monad, so you can <code>liftIO</code> if you need to evaluate IO actions.</p>
+
+<p>Because processes are implemented with <code>forkIO</code> we might be tempted to stop them by throwing an asynchronous exception to the process, but this is almost certainly the wrong thing to do. Instead we might send a kind of poison pill, which the process <em>ought</em> to handle by shutting down gracefully. Unfortunately because of the asynchronous nature of sending, this is no good because <code>send</code> will not fail under any circumstances. In fact, because <code>send</code> doesn&#8217;t block, we therefore have no way to know if the recipient existed at the time we sent the poison pill. Even if the recipient did exist, we still have no guarantee that the message we sent actually arrived - the network connection between the nodes could have broken, for example. Making this <em>shutdown</em> protocol synchronous is no good either - how long would we wait for a reply? Indefinitely?</p>
+
+<p>Exit signals come in two flavours - those that can be caught and those that cannot. A call to <code>exit :: (Serializable a) =&gt; ProcessId -&gt; a -&gt; Process ()</code> will dispatch an exit signal to the specified process. These <em>signals</em> can be intercepted and handled by the destination process however, so if you need to terminate the process in a brutal way, you can use the <code>kill :: ProcessId -&gt; String -&gt; Process ()</code> function, which sends an exit signal that cannot be handled.</p>
+<hr />
+<h4 id='an_important_note_about_exit_signals'><strong>An important note about exit signals</strong></h4>
+
+<p>Exit signals in Cloud Haskell are unlike asynchronous exceptions in regular haskell code. Whilst processes <em>can</em> use asynchronous exceptions - there&#8217;s nothing stoping this since the <code>Process</code> monad is an instance of <code>MonadIO</code> - exceptions thrown are not bound by the same ordering guarantees as messages delivered to a process. Link failures and exit signals <em>might</em> be implemented using asynchronous exceptions - that is the case in the current implementation - but these are implemented in such a fashion that if you send a message and <em>then</em> an exit signal, the message is guaranteed to arrive first.</p>
+
+<p>You should avoid throwing your own exceptions in code where possible. Instead, you should terminate yourself, or another process, using the built-in primitives <code>exit</code>, <code>kill</code> and <code>die</code>.</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>exit</span> <span class='n'>pid</span> <span class='n'>reason</span>  <span class='c1'>-- force `pid` to exit - reason can be any `Serializable` message</span>
+<span class='nf'>kill</span> <span class='n'>pid</span> <span class='n'>reason</span>  <span class='c1'>-- reason is a string - the *kill* signal cannot be caught</span>
+<span class='nf'>die</span> <span class='n'>reason</span>       <span class='c1'>-- as &#39;exit&#39; but kills *us*</span>
+</code></pre></div>
+<p>The <code>exit</code> and <code>kill</code> primitives do essentially the same thing, but catching the specific exception thrown by <code>kill</code> is impossible, making <code>kill</code> an <em>untrappable exit signal</em>. Of course you could trap <strong>all</strong> exceptions, but you already know that&#8217;s a very bad idea right!?</p>
+
+<p>The <code>exit</code> primitive is a little different. This provides support for trapping exit signals in a generic way, so long as your <em>exit handler</em> is able to recognise the underlying type of the &#8216;exit reason&#8217;. This (reason for exiting) is stored as a raw <code>Message</code>, so if your handler takes the appropriate type as an input (and therefore the <code>Message</code> can be decoded and passed to the handler) then the handler will run. This is pretty much the same approach as exception handling using <code>Typeable</code>, except that we decide whether or not the exception can be handled based on the type of <code>reason</code> instead of the type of the exception itself.</p>
+
+<p>Calling <code>die</code> will immediately raise an exit signal (i.e., <code>ProcessExitException</code>) in the calling process.</p>
+<hr />
+<h3 id='rethinking_the_task_layer'>Rethinking the Task Layer</h3>
+
+<p><a href='http://research.microsoft.com/en-us/um/people/simonpj/papers/parallel/remote.pdf'>Towards Haskell in the Cloud</a> describes a multi-layered architecture, in which manipulation of concurrent processes and message passing between them is managed in the <em>process layer</em>, whilst a higher level API described as the <em>task layer</em> provides additional features such as</p>
+
+<ul>
+<li>automatic recovery from failures</li>
+
+<li>data centric processing model</li>
+
+<li>a promise (or <em>future</em>) abstraction, representing the result of a calculation that may or may not have yet completed</li>
+</ul>
+
+<p>The <a href='https://github.com/haskell-distributed/distributed-process-platform'>distributed-process-platform</a> library implements parts of the <em>task layer</em>, but takes a very different approach to that described in the original paper and implemented by the <a href='http://hackage.haskell.org/package/remote'>remote</a> package. In particular, we diverge from the original design and defer to many of the principles defined by Erlang&#8217;s <a href='http://en.wikipedia.org/wiki/Open_Telecom_Platform'>Open Telecom Platform</a>, taking in some well established Haskell concurrency design patterns alongside.</p>
+
+<p>In fact, <a href='https://github.com/haskell-distributed/distributed-process-platform'>distributed-process-platform</a> does not really consider the <em>task layer</em> in great detail. We provide an API comparable to remote&#8217;s <code>Promise</code> in <a href='/static/doc/distributed-process-platform/Control-Distributed-Process-Platform-Async.html'>Control.Distributed.Process.Platform.Async</a>. This API however, is derived from Simon Marlow&#8217;s <a href='http://hackage.haskell.org/package/async'>Control.Concurrent.Async</a> package, and is not limited to blocking queries on <code>Async</code> handles in the same way. Instead our <a href='/static/doc/distributed-process-platform/Control-Distributed-Process-Platform-Async.html'>API</a> handles both blocking and non-blocking queries, polling and working with lists of <code>Async</code> handles. We also eschew throwing exceptions to indicate asynchronous task failures, instead handling <em>task</em> and connectivity failures using monitors. Users of the API need only concern themselves with the <code>AsyncResult</code>, which encodes the status and (possibly) outcome of the computation simply.</p>
+<hr /><div class='highlight'><pre><code class='haskell'><span class='nf'>demoAsync</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='nb'>()</span>
+<span class='nf'>demoAsync</span> <span class='ow'>=</span> <span class='kr'>do</span>
+  <span class='c1'>-- spawning a new task is fairly easy - this one is linked</span>
+  <span class='c1'>-- so if the caller dies, the task is killed too</span>
+  <span class='n'>hAsync</span> <span class='ow'>::</span> <span class='kt'>Async</span> <span class='kt'>String</span>
+  <span class='n'>hAsync</span> <span class='ow'>&lt;-</span> <span class='n'>asyncLinked</span> <span class='o'>$</span> <span class='p'>(</span><span class='n'>expect</span> <span class='o'>&gt;&gt;=</span> <span class='n'>return</span><span class='p'>)</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='kt'>String</span>
+
+  <span class='c1'>-- there is a rich API of functions to query an async handle</span>
+  <span class='kt'>AsyncPending</span> <span class='ow'>&lt;-</span> <span class='n'>poll</span> <span class='n'>hAsync</span>   <span class='c1'>-- not finished yet</span>
+
+  <span class='c1'>-- we can cancel the task if we want to</span>
+  <span class='c1'>-- cancel hAsync</span>
+  
+  <span class='c1'>-- or cancel it and wait until it has exited</span>
+  <span class='c1'>-- cancelWait hAsync</span>
+  
+  <span class='c1'>-- we can wait on the task and timeout if it&#39;s still busy</span>
+  <span class='kt'>Nothing</span> <span class='ow'>&lt;-</span> <span class='n'>waitTimeout</span> <span class='p'>(</span><span class='n'>within</span> <span class='mi'>3</span> <span class='kt'>Seconds</span><span class='p'>)</span> <span class='n'>hAsync</span>
+  
+  <span class='c1'>-- or finally, we can block until the task is finished!</span>
+  <span class='n'>asyncResult</span> <span class='ow'>&lt;-</span> <span class='n'>wait</span> <span class='n'>hAsync</span>
+  <span class='kr'>case</span> <span class='n'>asyncResult</span> <span class='kr'>of</span>
+      <span class='p'>(</span><span class='kt'>AsyncDone</span> <span class='n'>res</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>say</span> <span class='p'>(</span><span class='n'>show</span> <span class='n'>res</span><span class='p'>)</span>  <span class='c1'>-- a finished task/result</span>
+      <span class='kt'>AsyncCancelled</span>  <span class='ow'>-&gt;</span> <span class='n'>say</span> <span class='s'>&quot;it was cancelled!?&quot;</span>
+      <span class='kt'>AsyncFailed</span> <span class='p'>(</span><span class='kt'>DiedException</span> <span class='n'>r</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>say</span> <span class='o'>$</span> <span class='s'>&quot;it failed: &quot;</span> <span class='o'>++</span> <span class='p'>(</span><span class='n'>show</span> <span class='n'>r</span><span class='p'>)</span>
+</code></pre></div><hr />
+<p>Unlike remote&#8217;s task layer, we do not exclude IO, allowing tasks to run in the <code>Process</code> monad and execute arbitrary code. Providing a monadic wrapper around <code>Async</code> that disallows side effects is relatively simple, and we do not consider the presence of side effects a barrier to fault tolerance and automated process restarts. Erlang does not forbid <em>IO</em> in its processes, and yet that doesn&#8217;t render supervision trees ineffective. They key is to provide a rich enough API that statefull processes can recognise whether or not they need to provide idempotent initialisation routines.</p>
+
+<p>The utility of preventing side effects using the type system is, however, not to be sniffed at. A substrate of the <code>ManagedProcess</code> API is under development that provides a <em>safe process</em> abstraction in which side effect free computations can be embedded, whilst reaping the benefits of the framework.</p>
+
+<p>Work is also underway to provide abstractions for managing asynchronous tasks at a higher level, focussing on workload distribution and load regulation.</p>
+
+<p>The kinds of task that can be performed by the async implementations in <a href='https://github.com/haskell-distributed/distributed-process-platform'>distributed-process-platform</a> are limited only by their return type: it <strong>must</strong> be <code>Serializable</code> - that much should&#8217;ve been obvious by now. The type of asynchronous task definitions comes in two flavours, one for local nodes which require no remote-table or static serialisation dictionary, and another for tasks you wish to execute on remote nodes.</p>
+<div class='highlight'><pre><code class='haskell'><span class='c1'>-- | A task to be performed asynchronously.</span>
+<span class='kr'>data</span> <span class='kt'>AsyncTask</span> <span class='n'>a</span> <span class='ow'>=</span>
+    <span class='kt'>AsyncTask</span> 
+      <span class='p'>{</span>
+        <span class='n'>asyncTask</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='n'>a</span> <span class='c1'>-- ^ the task to be performed</span>
+      <span class='p'>}</span>
+  <span class='o'>|</span> <span class='kt'>AsyncRemoteTask</span> 
+      <span class='p'>{</span>
+        <span class='n'>asyncTaskDict</span> <span class='ow'>::</span> <span class='kt'>Static</span> <span class='p'>(</span><span class='kt'>SerializableDict</span> <span class='n'>a</span><span class='p'>)</span>
+          <span class='c1'>-- ^ the serializable dict required to spawn a remote process</span>
+      <span class='p'>,</span> <span class='n'>asyncTaskNode</span> <span class='ow'>::</span> <span class='kt'>NodeId</span>
+          <span class='c1'>-- ^ the node on which to spawn the asynchronous task</span>
+      <span class='p'>,</span> <span class='n'>asyncTaskProc</span> <span class='ow'>::</span> <span class='kt'>Closure</span> <span class='p'>(</span><span class='kt'>Process</span> <span class='n'>a</span><span class='p'>)</span>
+          <span class='c1'>-- ^ the task to be performed, wrapped in a closure environment</span>
+      <span class='p'>}</span>
+</code></pre></div>
+<p>The API for <code>Async</code> is fairly rich, so reading the haddocks is suggested.</p>
+
+<h4 id='managed_processes'>Managed Processes</h4>
+
+<p>Looking at <em>typed channels</em>, we noted that their insistence on a specific input domain was more <em>haskell-ish</em> than working with bare send and receive primitives. The <code>Async</code> sub-package also provides a type safe interface for receiving data, although it is limited to running a computation and waiting for its result.</p>
+
+<p>The <a href='/static/doc/distributed-process-platform/Control-Distributed-Process-Platform-ManagedProcess.html'>Control.Distributed.Processes.Platform.ManagedProcess</a> API provides a number of different abstractions that can be used to achieve similar benefits in your code. It works by introducing a standard protocol between your process and the <em>world around</em>, which governs how to handle request/reply processing, exit signals, timeouts, sleep/hibernation with <code>threadDelay</code> and even provides hooks that terminating processes can use to clean up residual state.</p>
+
+<p>The <a href='/static/doc/distributed-process-platform/Control-Distributed-Process-Platform-ManagedProcess.html'>API documentation</a> is quite extensive, so here we will simply point out the obvious differences. A implemented implemented with <code>ManagedProcess</code> can present a type safe API to its callers (and the server side code too!), although that&#8217;s not its primary benefit. For a very simplified example:</p>
+<div class='highlight'><pre><code class='haskell'><span class='nf'>add</span> <span class='ow'>::</span> <span class='kt'>ProcessId</span> <span class='ow'>-&gt;</span> <span class='kt'>Double</span> <span class='ow'>-&gt;</span> <span class='kt'>Double</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='kt'>Double</span>
+<span class='nf'>add</span> <span class='n'>sid</span> <span class='n'>x</span> <span class='n'>y</span> <span class='ow'>=</span> <span class='n'>call</span> <span class='n'>sid</span> <span class='p'>(</span><span class='kt'>Add</span> <span class='n'>x</span> <span class='n'>y</span><span class='p'>)</span>
+
+<span class='nf'>divide</span> <span class='ow'>::</span> <span class='kt'>ProcessId</span> <span class='ow'>-&gt;</span> <span class='kt'>Double</span> <span class='ow'>-&gt;</span> <span class='kt'>Double</span>
+          <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>DivByZero</span> <span class='kt'>Double</span><span class='p'>)</span>
+<span class='nf'>divide</span> <span class='n'>sid</span> <span class='n'>x</span> <span class='n'>y</span> <span class='ow'>=</span> <span class='n'>call</span> <span class='n'>sid</span> <span class='p'>(</span><span class='kt'>Divide</span> <span class='n'>x</span> <span class='n'>y</span> <span class='p'>)</span>
+
+<span class='nf'>launchMathServer</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='kt'>ProcessId</span>
+<span class='nf'>launchMathServer</span> <span class='ow'>=</span>
+  <span class='kr'>let</span> <span class='n'>server</span> <span class='ow'>=</span> <span class='n'>statelessProcess</span> <span class='p'>{</span>
+      <span class='n'>apiHandlers</span> <span class='ow'>=</span> <span class='p'>[</span>
+          <span class='n'>handleCall_</span>   <span class='p'>(</span><span class='nf'>\</span><span class='p'>(</span><span class='kt'>Add</span>    <span class='n'>x</span> <span class='n'>y</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>return</span> <span class='p'>(</span><span class='n'>x</span> <span class='o'>+</span> <span class='n'>y</span><span class='p'>))</span>
+        <span class='p'>,</span> <span class='n'>handleCallIf_</span> <span class='p'>(</span><span class='n'>input</span> <span class='p'>(</span><span class='nf'>\</span><span class='p'>(</span><span class='kt'>Divide</span> <span class='kr'>_</span> <span class='n'>y</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>y</span> <span class='o'>/=</span> <span class='mi'>0</span><span class='p'>))</span> <span class='n'>handleDivide</span>
+        <span class='p'>,</span> <span class='n'>handleCall_</span>   <span class='p'>(</span><span class='nf'>\</span><span class='p'>(</span><span class='kt'>Divide</span> <span class='kr'>_</span> <span class='kr'>_</span><span class='p'>)</span> <span class='ow'>-&gt;</span> <span class='n'>divByZero</span><span class='p'>)</span>
+        <span class='p'>]</span>
+    <span class='p'>}</span>
+  <span class='kr'>in</span> <span class='n'>spawnLocal</span> <span class='o'>$</span> <span class='n'>start</span> <span class='nb'>()</span> <span class='p'>(</span><span class='n'>statelessInit</span> <span class='kt'>Infinity</span><span class='p'>)</span> <span class='n'>server</span> <span class='o'>&gt;&gt;</span> <span class='n'>return</span> <span class='nb'>()</span>
+  <span class='kr'>where</span> <span class='n'>handleDivide</span> <span class='ow'>::</span> <span class='kt'>Divide</span> <span class='ow'>-&gt;</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>DivByZero</span> <span class='kt'>Double</span><span class='p'>)</span>
+        <span class='n'>handleDivide</span> <span class='p'>(</span><span class='kt'>Divide</span> <span class='n'>x</span> <span class='n'>y</span><span class='p'>)</span> <span class='ow'>=</span> <span class='n'>return</span> <span class='o'>$</span> <span class='kt'>Right</span> <span class='o'>$</span> <span class='n'>x</span> <span class='o'>/</span> <span class='n'>y</span>
+
+        <span class='n'>divByZero</span> <span class='ow'>::</span> <span class='kt'>Process</span> <span class='p'>(</span><span class='kt'>Either</span> <span class='kt'>DivByZero</span> <span class='kt'>Double</span><span class='p'>)</span>
+        <span class='n'>divByZero</span> <span class='ow'>=</span> <span class='n'>return</span> <span class='o'>$</span> <span class='kt'>Left</span> <span class='kt'>DivByZero</span>
+</code></pre></div>
+<p>Apart from the types and the imports, that is a complete definition. Whilst it&#8217;s not so obvious what&#8217;s going on here, the key point is that the invocation of <code>call</code> in the client facing API functions handles <strong>all</strong> of the relevant waiting/blocking, converting the async result and so on. Note that the <em>managed process</em> does not interact with its mailbox at all, but rather just provides callback functions which take some state and either return a new state and a reply, or just a new state. The process is <em>managed</em> in the sense that its mailbox is under someone else&#8217;s control.</p>
+
+<p>More complex examples of the <code>ManagedProcess</code> API can be seen in the <a href='/tutorials/tutorial3.html'>Managed Processes tutorial</a>. API documentation for HEAD is available <a href='/static/doc/distributed-process-platform/Control-Distributed-Process-Platform-ManagedProcess.html'>here</a>.</p>
+
+<h3 id='supervision_trees'>Supervision Trees</h3>
+
+<p>TBC</p>
+
+<h3 id='process_groups'>Process Groups</h3>
+
+<p>TBC</p>
+        </div>
+      </div>
+    </div>
+        <footer class="footer">
+      <div class="container">
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe></p>
+        <p>&copy; 2012 - 2013 <a href="http://twitter.com/welltyped">Well-Typed</a>
+            - <a href="http://twitter.com/CloudHaskell" target="_blank">CloudHaskell</a>
+            - <a href="https://github.com/hyperthunk" target="_blank">Tim Watson</a>
+        </p>
+        <p class="pull-right" style="clear: right"><iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=haskell-distributed&repo=distributed-process-platform&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="102px" height="20px"></iframe></p>
+        <p><a href="http://github.com/haskell-distributed">Code</a> licensed under <a href="https://github.com/haskell-distributed/distributed-process/blob/master/LICENSE" target="_blank">BSD-3</a>,
+        </p>
+        <p>
+            Website design shamelessly derived from <a href="https://twitter.com/kmett">Edward Kmett's'</a> 
+            <a href="http://lens.github.com/">lens library github pages</a> under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+        </p>
+        <p class="pull-right" style="clear: right; margin-right: -2px">
+            <a href="https://twitter.com/CloudHaskell" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @CloudHaskell</a>
+        </p>
+        <p><a href="http://glyphicons.com">Glyphicons</a> and <a href="http://www.vectorportal.com/">Vectorportal</a> images reproduced with permission.</p>
+        <p class="pull-right" style="clear: right"><!-- TODO: build status 
+        --></p>
+
+        <ul class="footer-links">
+          <li><a href="http://github.com/haskell-distributed/">Source</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://cloud-haskell.atlassian.net">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="/wiki.html">Wiki</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://hackage.haskell.org/package/distributed-process/">Haddocks</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  </body>
+</html>
+
